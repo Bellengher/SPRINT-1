@@ -1,5 +1,5 @@
 
-																#NIVEL 1
+								#NIVEL 1
                                                                 
 #Ejercicio 2 Realitza la següent consulta: Has d'obtenir el nom, email i país de cada companyia, ordena les dades en funció del nom de les companyies.
 SELECT (company_name) AS Name, email,country FROM company
@@ -27,7 +27,9 @@ GROUP BY company.id
 LIMIT 1;
 
 
-																#NIVEL 2
+
+
+							#NIVEL 2
 
 #Ejercicio 1 El teu cap està redactant un informe de tancament de l'any i et sol·licita que li enviïs informació rellevant per al document. 
 #Per a això et sol·licita verificar si en la base de dades existeixen companyies amb identificadors (aneu) duplicats.
@@ -81,7 +83,11 @@ JOIN transaction ON company.id = transaction.company_id WHERE transaction.declin
 GROUP BY  country 
 ORDER BY avg_amount DESC;
 
-																#NIVEL 3
+
+								
+
+								#NIVEL 3
+								
 
 #Ejercicio 1  Presenta el nom, telèfon i país de les companyies, juntament amb la quantitat total gastada, 
 #d'aquelles que van realitzar transaccions amb una despesa compresa entre 100 i 200 euros. Ordena els resultats de major a menor quantitat gastada.
