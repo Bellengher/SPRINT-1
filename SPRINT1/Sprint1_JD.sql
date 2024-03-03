@@ -2,29 +2,38 @@
 								#NIVEL 1
                                                                 
 #Ejercicio 2 Realitza la següent consulta: Has d'obtenir el nom, email i país de cada companyia, ordena les dades en funció del nom de les companyies.
-SELECT (company_name) AS Name, email,country FROM company
-ORDER BY name;
+
+SELECT (company_name) AS Name, email,country FROM company		#1º Selecciono los datos requeridos de la tabla company
+ORDER BY name;								#2º Los ordeno por name
 
 #Ejercicio 3 Des de la secció de màrqueting et sol·liciten que els passis un llistat dels països que estan fent compres.
-SELECT country FROM company
-JOIN transaction ON company.id = transaction.company_id WHERE transaction.declined = 0 # pongo declined = 0 porque tengo en cuenta solo las ventas hechas y no las rechazadas
-GROUP BY country;
+									
+SELECT country FROM company								#1º Selecciono el country de la tabla company
+JOIN transaction ON company.id = transaction.company_id 				#2º Hago Join con tabla transaction por P y F KEY
+WHERE transaction.declined = 0 								#3º declined = 0 porque solo tomo en cuenta transacciones no rechazadas
+GROUP BY country;									#4º Agrupo por country
 
 #Ejercicio 4 Des de màrqueting també volen saber des de quants països es realitzen les compres.
-SELECT COUNT(DISTINCT country)AS "Countries" FROM company
-JOIN transaction ON company.id = transaction.company_id WHERE transaction.declined = 0;
+									
+SELECT COUNT(DISTINCT country)AS "Countries" FROM company				#1º Conteo distintivo de country de la tabla company
+JOIN transaction ON company.id = transaction.company_id					#2º Hago JOIN con tabla transaction por P y F KEY
+WHERE transaction.declined = 0;		 						#3º declined = 0 porque solo tomo en cuenta transacciones no rechazadas
 
 
-#Ejercicio 5 El teu cap identifica un error amb la companyia que té id 'b-2354'. Per tant, et sol·licita que li indiquis el país i nom de companyia d'aquest id.
-SELECT country , company_name FROM company 
-WHERE company.id = "b-2354"; 
+#Ejercicio 5 El teu cap identifica un error amb la companyia que té id 'b-2354'. Per tant, et sol·licita que li indiquis el país i nom de companyia d'aquest id
+									
+SELECT country , company_name FROM company 		#1º Selecciono country y company_name de la tabla company		
+WHERE company.id = "b-2354"; 				#2º Filtro para que company.id sea el que nos indica el ejercicio
 
 
 #Ejercicio 6 A més, el teu cap et sol·licita que indiquis quina és la companyia amb major despesa mitjana?
-SELECT company_name, AVG(amount)  FROM transaction
-JOIN company ON company.id = transaction.company_id WHERE transaction.declined = 0
-GROUP BY company.id
-LIMIT 1;
+									
+SELECT company_name, AVG(amount) AS promedio  FROM transaction		#1º Selecciono company_name y hago promedio de amount de la tabla transaction
+JOIN company ON company.id = transaction.company_id 			#2º Hago JOIN con tabla company por P y F KEY
+WHERE transaction.declined = 0						#3º declined = 0 porque solo tomo en cuenta transacciones no rechazadas
+GROUP BY company.id							#4º Agrupo por company.id
+ORDER BY promedio DESC							#5º Ordeno por promedio decendente para que el mayor quede arrida de la columna			
+LIMIT 1;								#6º Limit 1 porque piden la mayor
 
 
 
