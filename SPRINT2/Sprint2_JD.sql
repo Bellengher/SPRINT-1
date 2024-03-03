@@ -58,7 +58,7 @@ SELECT company_id FROM transaction WHERE company_id NOT IN 					#3º busca las c
 
 SELECT country, ROUND(AVG(amount),2) AS media_pais FROM company 						#2º selecciono country de company y media_pais de transaction
 	JOIN transaction ON company.id = company_id WHERE declined = 0 GROUP BY country HAVING media_pais >  	# haciendo JOIN tomando solo declined=0 y agrupando por country haciendo Having para que me filtre las que sean mayores a la media general	
-		(SELECT AVG(amount) FROM transaction As media_genral WHERE declined = 0 GROUP BY country)	#1º busco la media general agrupando por pais
+		(SELECT AVG(amount) FROM transaction As media_genral WHERE declined = 0 )			#1º busco la media general de transaction
  ;
 
 /*Ejercico 2 Necessitem optimitzar l'assignació dels recursos i dependrà de la capacitat operativa que es requereixi,
