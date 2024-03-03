@@ -67,7 +67,8 @@ SELECT country, ROUND(AVG(amount),2) AS media_pais FROM company 						#2º selec
 
 SELECT id,company_name,phone,email,country,website,conteo,									#4º Finalmente le indico los datos que quiero mostrar a los que se agregará el CASE
 CASE WHEN conteo > 4 THEN "Mas de 4 transacciones"										#3º con un CASE hago la condicion si conteo > 4 y asigno las respuestas
-ELSE "Menos de 4 transacciones"
+     WHEN conteo = 4 THEN "Justo 4 transacciones"										# Por si alguno tiene justo 4 transacciones
+	ELSE "Menos de 4 transacciones"
 END AS total_transacciones
  FROM
 (SELECT * FROM company JOIN 													#2º hago JOIN con *company para tener los datos de las empresas
