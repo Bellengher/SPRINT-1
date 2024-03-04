@@ -1,3 +1,4 @@
+CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
 
 CREATE TABLE IF NOT EXISTS credit_card (
@@ -10,5 +11,4 @@ CREATE TABLE IF NOT EXISTS credit_card (
 	FOREIGN KEY (id) REFERENCES transaction(credit_card_id)  
 );
 
-CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
