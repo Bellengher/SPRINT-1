@@ -1,16 +1,54 @@
+
+*INDEXAR TABLA CREDIT_CARD:
 CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
 
++CREAR LA TABLA CREDIT CARD:
 CREATE TABLE IF NOT EXISTS credit_card (
-	id VARCHAR(12) PRIMARY KEY,
-	iban VARCHAR(50),
-	pan INT(16),
-	pin INT(8),
-	cvv INT(3),
+	id VARCHAR(20) PRIMARY KEY,
+	iban VARCHAR(60),
+	pan INT(50),
+	pin INT(4),
+	cvv INT(4),
 	expiring_date DATE ,
 	FOREIGN KEY (id) REFERENCES transaction(credit_card_id)  
 );
 
-
+*PROCESO PARA CAMBIAR DE FORMATO DATE EN VISUAL STUDI CODE:
+EDIT/REPLACE (USE REGULAR EXPRESSION)  !!!!
 BUSCAR EN VISUAL STUDIO CODE: \b\d{1,2}/\d{1,2}/\d{2}\b
 REMPLAZAR A: STR_TO_DATE('$0', '%m/%d/%y')
+
+EDIT/REPLACE (WITHOUT REGULAR EXPRESSION) !!!!
+REPLACE: 'STR ---> STR
+REPLACE: )')  ---> ))
+
+
+
+*MANIPULAR BASE DE DATOS/ TABLAS
+
+#MOSTRAR TABLAS
+SHOW tables;			# Muestra las tablas de una base de datos
+show columns from country;	# Muestra las columnas de la tabla indicada
+show create table city;		# Muestra el codigo para crear la tabla por si quisieramos clonarla
+
+#MODIFICAR TABLAS
+rename table tabla ; 								# Renombra la tabla indicada
+alter table tabla add NOMBRE_DE_CAMPO INT NOT NULL; 				# Modifica la tabla indicada
+alter table tabla change NOMBRE_ORIGINAL_DE_CAMPO NUEVO_NOMBRE INT NOT NULL; 	# cambia nombre del campo
+alter table tabla drop column NOMBRE_COLUMNA ;					# Elimina una columna
+
+#MANIPULAR BASES DE DATOS
+SHOW DATABASES; 		# MUESTRA LAS BASES DE DATOS
+CREATE DATABASE NOMBRE ;  	# CREA UNA BASE DE DATOS
+DROP DATABASE NOMBRE ;		# ELIMINA BASE DE DATOS
+
+SHOW INDEXES FROM 'BASE_DE_DATOS.TABLA';	# MUESTRA INDEX DE LA TABLA
+show columns FROM 'BASE_DE_DATOS.TABLA';	# MUESTRA COLUMNAS DE LA TABLA
+
+
+
+
+
+    
+    
