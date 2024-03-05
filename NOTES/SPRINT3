@@ -12,4 +12,5 @@ CREATE TABLE IF NOT EXISTS credit_card (
 );
 
 
-
+BUSCAR EN VISUAL STUDIO CODE: \b\d{1,2}/\d{1,2}/\d{2}\b
+REMPLAZAR A: STR_TO_DATE('$0', '%m/%d/%y')
