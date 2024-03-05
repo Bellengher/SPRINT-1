@@ -4,11 +4,12 @@ CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 CREATE TABLE IF NOT EXISTS credit_card (
 	id VARCHAR(12) PRIMARY KEY,
 	iban VARCHAR(50),
-	pan INT(6),
+	pan INT(16),
 	pin INT(8),
 	cvv INT(3),
 	expiring_date DATE ,
 	FOREIGN KEY (id) REFERENCES transaction(credit_card_id)  
 );
+
 
 
