@@ -24,6 +24,10 @@ REPLACE: 'STR ---> STR
 REPLACE: )')  ---> ))
 
 
+*AGREGAR UNA FOREIGN KEY :
+ALTER TABLE transaction
+ADD foreign key (user_id) REFERENCES user(id);
+
 
 *MANIPULAR BASE DE DATOS/ TABLAS
 
