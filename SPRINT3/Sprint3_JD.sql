@@ -7,9 +7,6 @@ La nova taula ha de ser capaç d'identificar de manera única cada targeta i est
 Després de crear la taula serà necessari que ingressis la informació del document denominat "dades_introduir_credit". 
 Recorda mostrar el diagrama i realitzar una breu descripció d'aquest.*/
 
-#INDEXAR TABLA CREDIT_CARD:
-CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
-
 #CREAR LA TABLA CREDIT CARD:
 CREATE TABLE IF NOT EXISTS credit_card (
 	id VARCHAR(20) PRIMARY KEY,
@@ -19,6 +16,9 @@ CREATE TABLE IF NOT EXISTS credit_card (
 	cvv INT(4),
 	expiring_date DATE 
 );
+
+#INDEXAR TABLA CREDIT_CARD:
+CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
 
 /*Exercici 2
