@@ -128,15 +128,17 @@ alter table company drop column website ;
 #2º CAMBIO: HA ELIMINADO LA VIEW VISTA_MARKETING
 DROP VIEW Vista_Marketing; 
 
-#3º CAMBIO: HA CAMBIADO DE NOMBRE EN LA TABLA user A LA COLUMNA email POR personal_email
+#3º CAMBIO: HA ELIMINADO LA VIEW INFORMETECNICO
+DROP VIEW InformeTecnico;
+
+#4º CAMBIO: HA CAMBIADO DE NOMBRE EN LA TABLA user A LA COLUMNA email POR personal_email
 ALTER TABLE user CHANGE email personal_email VARCHAR(150);
 
-#4º CAMBIO: EN LA TABLA credit_card HA AGREGADO LA COLUMNA fecha_actual
+#5º CAMBIO: EN LA TABLA credit_card HA AGREGADO LA COLUMNA fecha_actual
 ALTER TABLE credit_card ADD fecha_actual DATE;
 
-#5º CAMBIO: DE LA TABLA credit_card HA ELIMINADO LA COLUMNA pan.
+#6º CAMBIO: DE LA TABLA credit_card HA ELIMINADO LA COLUMNA pan.
 alter table credit_card drop column pan ;
-
 
 
 /*Exercici 2
