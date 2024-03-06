@@ -123,7 +123,7 @@ Un company del teu equip va realitzar modificacions en la base de dades, però n
 Et demana que l'ajudis a deixar els comandos executats per a obtenir les següents modificacions (s'espera que realitzin 6 canvis) */
 
 #1º CAMBIO: EN LA TABLA COMPANY HA ELIMINADO LA COLUMNA WEBSITE
-alter table company drop column website ;
+ALTER TABLE company DROP COLUMN website ;
 
 #2º CAMBIO: HA ELIMINADO LA VIEW VISTA_MARKETING
 DROP VIEW Vista_Marketing; 
@@ -138,7 +138,7 @@ ALTER TABLE user CHANGE email personal_email VARCHAR(150);
 ALTER TABLE credit_card ADD fecha_actual DATE;
 
 #6º CAMBIO: DE LA TABLA credit_card HA ELIMINADO LA COLUMNA pan.
-alter table credit_card drop column pan ;
+ALTER TABLE credit_card DROP COLUMN pan ;
 
 
 /*Exercici 2
