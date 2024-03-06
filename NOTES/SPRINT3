@@ -1,9 +1,6 @@
-# TRUCO DE NATALYA:
-* set autocommit = off;		#crea un punto de retorno antes de los cambios.
-* rollback;			#vuelve al punto de retorno
 
-*INDEXAR TABLA CREDIT_CARD:
-CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
+
+
 
 
 +CREAR LA TABLA CREDIT CARD:
@@ -27,32 +24,67 @@ REPLACE: 'STR ---> STR
 REPLACE: )')  ---> ))
 
 
-*AGREGAR UNA FOREIGN KEY :
-ALTER TABLE transaction
-ADD foreign key (user_id) REFERENCES user(id);
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 *MANIPULAR BASE DE DATOS/ TABLAS
 
-#MOSTRAR TABLAS
-SHOW tables;			# Muestra las tablas de una base de datos
-show columns from country;	# Muestra las columnas de la tabla indicada
-show create table city;		# Muestra el codigo para crear la tabla por si quisieramos clonarla
+***MOSTRAR***
+SHOW TABLES;						# Muestra las tablas de una base de datos
+SHOW COLUMNS FROM nombre_de_tabla;			# Muestra las columnas de la tabla indicada
+SHOW CREATE TABLE nombre_de_tabla;			# Muestra el codigo para crear la tabla por si quisieramos clonarla
+SHOW INDEXES FROM base_de_datos.nombre_de_tabla;	# MUESTRA INDEX DE LA TABLA
+SHOW COLUMNS FROM base_de_datos.nombre_de_tabla;	# MUESTRA COLUMNAS DE LA TABLA
 
-#MODIFICAR TABLAS
-rename table 'tabla' ; 								# Renombra la tabla indicada
-alter table 'tabla' add NOMBRE_DE_CAMPO INT NOT NULL; 				# Modifica la tabla indicada
-alter table 'tabla' change NOMBRE_ORIGINAL_DE_CAMPO NUEVO_NOMBRE INT NOT NULL; 	# cambia nombre del campo
-alter table 'tabla' drop column NOMBRE_COLUMNA ;					# Elimina una columna
+***CREAR TABLA***
+CREATE TABLE IF NOT EXISTS nombre_de_tabla (		# Crear tabla
+	campo1 DATATYPE PRIMARY KEY,			# Nombrar campo y datatype
+	campo2 DATATYPE, 
+);
 
-#MANIPULAR BASES DE DATOS
-SHOW DATABASES; 		# MUESTRA LAS BASES DE DATOS
-CREATE DATABASE NOMBRE ;  	# CREA UNA BASE DE DATOS
-DROP DATABASE NOMBRE ;		# ELIMINA BASE DE DATOS
+***INDEXAR TABLA***
+CREATE INDEX nombre_indice ON nombre_tabla (columna1, columna2, ...);
 
-SHOW INDEXES FROM 'BASE_DE_DATOS.TABLA';	# MUESTRA INDEX DE LA TABLA
-show columns FROM 'BASE_DE_DATOS.TABLA';	# MUESTRA COLUMNAS DE LA TABLA
+CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
+***AGREGAR UNA FOREIGN KEY***
+ALTER TABLE tabla_de_hechos
+ADD foreign key (columna_tabla_de_hechos) REFERENCES tabla_de_medidas(columna_tabla_de_medidas);
+
+
+***MODIFICAR TABLAS***
+RENAME TABLE nombre_de_tabla_anterior TO nuevo_nombre_de_tabla;			# Renombra la tabla indicada
+DROP TABLE nombre_de_tabla;							# Elimina una tabla
+
+
+***MODIFICAR COLUMNAS***
+ALTER TABLE nombre_de_tabla ADD nombre_de_columna INT NOT NULL; 		# Crea una nueva columna
+ALTER TABLE nombre_de_tabla CHANGE  nombre_original nuevo_nombre INT NOT NULL; 	# Cambia nombre del columna
+ALTER TABLE nombre_de_tabla DROP COLUMN nombre_de_columna ;			# Elimina una columna
+
+***MANIPULAR BASES DE DATOS***
+SHOW DATABASES; 				# MUESTRA LAS BASES DE DATOS
+CREATE DATABASE nombre_de_base_de_datos ;  	# CREA UNA BASE DE DATOS
+DROP DATABASE nombre_de_base_de_datos ;		# ELIMINA BASE DE DATOS
+
+***WILDCARDS***
+SER AUTOCOMMIT = OFF;		# Crea un punto de retorno antes de los cambios.
+ROLLBACK;			# Vuelve al punto de retorno
+
+
+***PROCESOS***
+**CREAR PROCESP**
+DELIMITER //
+
+CREATE PROCEDURE nombre_de_proceso()
+BEGIN
+    SELECT * FROM nombre_de_tabla;	# Aquí se indica lo que queremos que haga el proceso
+END //
+
+DELIMITER ;
+
+CALL nombre_de_proceso;			# Llama al proceso
+DROP PROCEDURE nombre_de_proceso;	# Elimina el proceso
 
 
 
