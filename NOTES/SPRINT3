@@ -37,10 +37,10 @@ show columns from country;	# Muestra las columnas de la tabla indicada
 show create table city;		# Muestra el codigo para crear la tabla por si quisieramos clonarla
 
 #MODIFICAR TABLAS
-rename table tabla ; 								# Renombra la tabla indicada
-alter table tabla add NOMBRE_DE_CAMPO INT NOT NULL; 				# Modifica la tabla indicada
-alter table tabla change NOMBRE_ORIGINAL_DE_CAMPO NUEVO_NOMBRE INT NOT NULL; 	# cambia nombre del campo
-alter table tabla drop column NOMBRE_COLUMNA ;					# Elimina una columna
+rename table 'tabla' ; 								# Renombra la tabla indicada
+alter table 'tabla' add NOMBRE_DE_CAMPO INT NOT NULL; 				# Modifica la tabla indicada
+alter table 'tabla' change NOMBRE_ORIGINAL_DE_CAMPO NUEVO_NOMBRE INT NOT NULL; 	# cambia nombre del campo
+alter table 'tabla' drop column NOMBRE_COLUMNA ;					# Elimina una columna
 
 #MANIPULAR BASES DE DATOS
 SHOW DATABASES; 		# MUESTRA LAS BASES DE DATOS
