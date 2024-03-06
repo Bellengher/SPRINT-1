@@ -1,3 +1,6 @@
+# TRUCO DE NATALYA:
+* set autocomit = off;		#crea un punto de retorno antes de los cambios.
+* rollback;			#vuelve al punto de retorno
 
 *INDEXAR TABLA CREDIT_CARD:
 CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
