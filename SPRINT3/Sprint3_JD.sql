@@ -161,7 +161,7 @@ SELECT * FROM InformeTecnico;											#5º Visualizo la VIEW
 
 
 
-#SOLO PARA ENSEÑAR A NATALYA PERO ES MÁS EFICIENTE HACERLO CON JOIN
+#PROBÉ LA OPCION DE HACERLO CON SUBQUERY PERO HE LEIDO QUE ES MÁS EFICIENTE HACERLO CON JOIN
 SELECT t.id Numer_Transaccion,							
     (SELECT name FROM user WHERE id = t.user_id) Nombre,
     (SELECT surname FROM user WHERE id = t.user_id) Apellido,
