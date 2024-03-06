@@ -20,6 +20,13 @@ CREATE TABLE IF NOT EXISTS credit_card (
 #INDEXAR TABLA CREDIT_CARD:
 CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
+#CREAR FOREGIN KEYS PARA QUE EL MODELO DESDE LA TABLA transaction QUE ES LA TABLA DE HECHOS.
+ALTER TABLE transaction						#INDICO CAMBIO EN TABLA transaction
+ADD FOREIGN KEY (credit_card_id) REFERENCES credit_card(id);	#AGREGO COMO FOREIGN KEY credit_card_id PARA QUE SE RELACIONE CON id DE LA TABLA credit_card
+
+ALTER TABLE transaction						#INDICO CAMBIO EN TABLA transaction
+ADD FOREIGN KEY (user_id) REFERENCES user(id);			#AGREGO COMO FOREIGN KEY user_id PARA QUE SE RELACIONES CON id 	DE LA TABLA user
+
 
 /*Exercici 2
 El departament de Recursos Humans ha identificat un error en el número de compte de l'usuari amb el: credit_card_id CcU-2938. 
