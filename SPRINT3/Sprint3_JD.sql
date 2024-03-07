@@ -96,10 +96,9 @@ SELECT * FROM TRANSACTION WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";		#2
  
 CREATE VIEW Vista_Marketing AS							#3º Creo la visa
 SELECT company_name, phone, country,media FROM company c JOIN			#2º Hago JOIN con los campos requeridos de la tabla company
-(SELECT company_id, ROUND(AVG(amount),2) media FROM transaction 		#1º Busco la media por compañia descartando rechazados (declined=0)
-WHERE declined=0 GROUP BY company_id) d ON c.id = company_id;
-
-SELECt * FROM Vista_Marketing;							#4º Visualizo la VIEW
+(SELECT company_id, ROUND(AVG(amount),2) media FROM transaction 		#1º Busco la media de TODAS las transacciones agrupando por compañia 
+GROUP BY company_id) d ON c.id = company_id								
+ORDER BY media DESC;								#4º Ordeno por la media de mayor a menor como se pide.
 
 
 
