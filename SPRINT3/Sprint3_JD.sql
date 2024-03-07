@@ -83,7 +83,7 @@ SELECT * from credit_card;						#2º Hago Select para comprobarlo
 Elimina de la taula transaction el registre amb ID 02C6201E-D90A-1859-B4EE-88D2986D3B02 de la base de dades*/
 
 DELETE FROM transaction WHERE transaction.id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";	#1º Elimino el registro indicado
-SELECT * FROM TRANSACTION;								#2º Hago SELECT y busco el id para comprobar la eliminacion. 
+SELECT * FROM TRANSACTION WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";		#2º Hago SELECT y busco el id para comprobar la eliminacion. 
 
 
 
