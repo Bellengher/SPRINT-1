@@ -2,7 +2,7 @@
 
 
 
-+CREAR LA TABLA CREDIT CARD:
++CREAR LA TABLA CREDIT CARD:💻
 CREATE TABLE IF NOT EXISTS credit_card (
 	id VARCHAR(20) PRIMARY KEY,
 	iban VARCHAR(60),
@@ -26,7 +26,7 @@ REPLACE: )')  ---> ))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*MANIPULAR BASE DE DATOS/ TABLAS
+*MANIPULAR BASE DE DATOS/ TABLAS 🔓
 
 ***MOSTRAR***
 SHOW TABLES;						# Muestra las tablas de una base de datos
@@ -35,18 +35,18 @@ SHOW CREATE TABLE nombre_de_tabla;			# Muestra el codigo para crear la tabla por
 SHOW INDEXES FROM base_de_datos.nombre_de_tabla;	# MUESTRA INDEX DE LA TABLA
 SHOW COLUMNS FROM base_de_datos.nombre_de_tabla;	# MUESTRA COLUMNAS DE LA TABLA
 
-***CREAR TABLA***
+***CREAR TABLA*** 📋
 CREATE TABLE IF NOT EXISTS nombre_de_tabla (		# Crear tabla
 	campo1 DATATYPE PRIMARY KEY,			# Nombrar campo y datatype
 	campo2 DATATYPE, 
 );
 
-***INDEXAR TABLA***
+***INDEXAR TABLA*** 📋
 CREATE INDEX nombre_indice ON nombre_tabla (columna1, columna2, ...);
 
 CREATE INDEX idx_credit_card_id ON transaction(credit_card_id);
 
-***AGREGAR UNA FOREIGN KEY***
+***AGREGAR UNA FOREIGN KEY*** 🔑
 ALTER TABLE tabla_de_hechos
 ADD foreign key (columna_tabla_de_hechos) REFERENCES tabla_de_medidas(columna_tabla_de_medidas);
 
@@ -61,18 +61,19 @@ ALTER TABLE nombre_de_tabla ADD nombre_de_columna INT NOT NULL; 		# Crea una nue
 ALTER TABLE nombre_de_tabla CHANGE  nombre_original nuevo_nombre INT NOT NULL; 	# Cambia nombre del columna
 ALTER TABLE nombre_de_tabla DROP COLUMN nombre_de_columna ;			# Elimina una columna
 
-***MANIPULAR BASES DE DATOS***
+***MANIPULAR BASES DE DATOS***🤖
 SHOW DATABASES; 				# MUESTRA LAS BASES DE DATOS
 CREATE DATABASE nombre_de_base_de_datos ;  	# CREA UNA BASE DE DATOS
 DROP DATABASE nombre_de_base_de_datos ;		# ELIMINA BASE DE DATOS
 
-***WILDCARDS***
-SER AUTOCOMMIT = OFF;		# Crea un punto de retorno antes de los cambios.
-ROLLBACK;			# Vuelve al punto de retorno
+***WILDCARDS*** 🪄
+SER AUTOCOMMIT = OFF;		# Desactiva el autoguardado.	
+COMMIT;				# Crea un punto de retorno antes de los cambios.
+ROLLBACK;			# Vuelve al punto de retorno.
 
 
 ***PROCESOS***
-**CREAR PROCESP**
+**CREAR PROCESO**
 DELIMITER //
 
 CREATE PROCEDURE nombre_de_proceso()
