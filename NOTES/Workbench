@@ -1,16 +1,24 @@
+***Creating a FACT TABLE***
 
+CREATE TABLE IF NOT EXISTS sales_fact (
+    sales_id INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    date_id INT,
+    quantity INT,
+    total_amount DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),	#This is references about dimension table 
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (date_id) REFERENCES dates(date_id)
+);
 
+***Creating a dimension table***
 
-
-+CREAR LA TABLA CREDIT CARD:💻
-CREATE TABLE IF NOT EXISTS credit_card (
-	id VARCHAR(20) PRIMARY KEY,
-	iban VARCHAR(60),
-	pan INT(50),
-	pin INT(4),
-	cvv INT(4),
-	expiring_date DATE ,
-	FOREIGN KEY (id) REFERENCES transaction(credit_card_id)  
+CREATE TABLE IF NOT EXISTS product (					#This example is counting Fact table above.
+	id INT PRIMARY KEY,
+	colour VARCHAR(60),
+	code INT(50),
+	size INT(4)
 );
 
 *PROCESO PARA CAMBIAR DE FORMATO DATE EN VISUAL STUDI CODE:
