@@ -95,7 +95,11 @@ CALL nombre_de_proceso;			# Llama al proceso
 DROP PROCEDURE nombre_de_proceso;	# Elimina el proceso
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+***PARTITION BY***💔
 
-
+SELECT column1,column2,column3,
+    SUM(column4) OVER (PARTITION BY column1 ORDER BY column2) AS sum_column4_partitioned
+FROM
+    your_table;
     
     
