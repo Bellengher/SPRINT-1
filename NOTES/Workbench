@@ -26,7 +26,7 @@ REPLACE: )')  ---> ))
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-*MANIPULAR BASE DE DATOS/ TABLAS 🔓
+*****MANIPULAR BASE DE DATOS/ TABLAS 🔓
 
 ***MOSTRAR***
 SHOW TABLES;						# Muestra las tablas de una base de datos
@@ -55,22 +55,30 @@ ADD foreign key (columna_tabla_de_hechos) REFERENCES tabla_de_medidas(columna_ta
 RENAME TABLE nombre_de_tabla_anterior TO nuevo_nombre_de_tabla;			# Renombra la tabla indicada
 DROP TABLE nombre_de_tabla;							# Elimina una tabla
 
+**FILAS
+INSERT INTO table_name (column1, column2,...) VALUES (value1, value2,...);	# Insertar una fila 
+UPDATE table_name SET column1 = value1, ... WHERE condition;			# Actualizar una fila
+DELETE FROM table_name WHERE condition;						# Borrar fila
 
-***MODIFICAR COLUMNAS***
+**MODIFICAR COLUMNAS
 ALTER TABLE nombre_de_tabla ADD nombre_de_columna INT NOT NULL; 		# Crea una nueva columna
 ALTER TABLE nombre_de_tabla CHANGE  nombre_original nuevo_nombre INT NOT NULL; 	# Cambia nombre del columna
 ALTER TABLE nombre_de_tabla DROP COLUMN nombre_de_columna ;			# Elimina una columna
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 ***MANIPULAR BASES DE DATOS***🤖
 SHOW DATABASES; 				# MUESTRA LAS BASES DE DATOS
 CREATE DATABASE nombre_de_base_de_datos ;  	# CREA UNA BASE DE DATOS
 DROP DATABASE nombre_de_base_de_datos ;		# ELIMINA BASE DE DATOS
 
-***WILDCARDS*** 🪄
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+***SECURE STEP*** 🪄
 SER AUTOCOMMIT = OFF;		# Desactiva el autoguardado.	
 COMMIT;				# Crea un punto de retorno antes de los cambios.
 ROLLBACK;			# Vuelve al punto de retorno.
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ***PROCESOS***
 **CREAR PROCESO**
@@ -85,7 +93,7 @@ DELIMITER ;
 
 CALL nombre_de_proceso;			# Llama al proceso
 DROP PROCEDURE nombre_de_proceso;	# Elimina el proceso
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
