@@ -21,7 +21,7 @@ A dimension table consists of:
 Primary key: a unique identifier for each record
 Attributes: descriptive data about the entity, such as product name or store address
 
-CREATE TABLE IF NOT EXISTS product (					#This example is counting Fact table above.
+CREATE TABLE IF NOT EXISTS product (					#This example is counting Fact's table above.
 	id INT PRIMARY KEY,
 	colour VARCHAR(60),
 	code INT(50),
