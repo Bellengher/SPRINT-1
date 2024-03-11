@@ -20,31 +20,38 @@ Mostra la mitjana de la suma de transaccions per IBAN de les targetes de crèdit
  SELECT * FROM companies WHERE company_name = "Donec Ltd" ;   # company_id = b-2242
 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
  
-								#NIVEL2
-
+							#NIVEL2
 	 
-***CREACION DE LA TABLA***
-CREATE TABLE last_card_movements AS
-SELECT card_id, timestamp, declined, sum_declined
-FROM (SELECT card_id, timestamp, declined,
-           SUM(declined) OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS sum_declined,
-           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num
-    FROM transactions
+/* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
+van ser declinades */
+CREATE TABLE last_card_movements AS							#4º Finalmente creo la tabla
+SELECT card_id, timestamp, declined,row_num						#2º Selecciono card_id, timestamp, declined y la columna row_num
+FROM (SELECT card_id, timestamp, declined,						#1º Hago la subconsulta con los datos que necesito y 
+           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num	# Con la funcion ROW NUMBER asigno el numero de fila a cada
+    FROM transactions									# fila resultante de la consulta 
 ) AS ranked_transactions
-WHERE row_num <= 3;
+WHERE row_num <= 3;									#3º row_num <=3 porque nos pide analizar las 3 ultimas transacciones
+SELECt * FROM last_card_movements;
 
 
-SELECT * FROM last_card_movements;
+SELECT COUNT(DISTINCT card_id) FROM last_card_movements;	#TENEMOS 242 TARJETAS QUE HAN HECHO AL MENOS 1 OPERACIÓN
 
 
-# Quantes targetes estan actives?
-SELECT COUNT(card_id) operating_cards 
-	FROM (SELECT card_id, sum_declined 
-		FROM last_card_movements 
-        WHERE sum_declined = 0 GROUP BY card_id) oc 
+/* Quantes targetes estan actives? ***CONSIDERANDO ACTIVAS LAS TARJETAS QUE TIENEN AL MENOS 1 OPERACIÓN APROBADA EN LAS ULTIMAS 3 TRANSACCIONES
+(TAMBIÉN CONSIDERO LAS QUE TIENEN MENOS DE 3 OPERACIONES EN TOTAL) */
+
+SELECT COUNT(card_id) operating_cards 				#3º Hago un conteo de los id de tarjeta (poniendo un alías) de la subconsulta anterior	
+	FROM (SELECT card_id, declined 				#1º Seleccciono la columna con el id de la tarjeta y la que tiene las operaciones rechazadas
+		FROM last_card_movements 			# de la tabla que he creado anteriormente 
+        WHERE declined = 0 GROUP BY card_id) oc 		#2º Hago el flitro para que considere las que tienen al menos una op aprobada (declined=0)
+								# agrupando por el id de tarjeta
 ;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 								#NIVEL3
 
