@@ -26,13 +26,13 @@ Mostra la mitjana de la suma de transaccions per IBAN de les targetes de crèdit
 	 
 /* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
 van ser declinades */
-CREATE TABLE last_card_movements AS							#4º Finalmente creo la tabla
-SELECT card_id, timestamp, declined,						  #1º Hago la subconsulta con los datos que necesito y 
-           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num	# Con la funcion ROW NUMBER asigno el numero de fila a cada
-    FROM transactions									# fila resultante de la consulta 
+CREATE TABLE last_card_movements AS								#4º Finalmente creo la tabla
+SELECT *											#2º Selecciono card_id, timestamp, declined y la columna row_num de la subquery
+FROM (SELECT card_id, timestamp, declined,							#1º Hago la subquery con card_id, timestamp, declined y creo una columna
+           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num		# con la funcion ROW NUMBER asignando un numero de unico a cada 
+    FROM transactions										# fila resultante de la consulta 
 ) AS ranked_transactions
-WHERE row_num <= 3;									#3º row_num <=3 porque nos pide analizar las 3 ultimas transacciones
-SELECt * FROM last_card_movements;
+WHERE row_num <= 3;										#3º filtro con row_num <=3 porque nos pide analizar las 3 ultimas transacciones
 
 
 SELECT COUNT(DISTINCT card_id) FROM last_card_movements;	#TENEMOS 242 TARJETAS QUE HAN HECHO AL MENOS 1 OPERACIÓN
