@@ -27,8 +27,7 @@ Mostra la mitjana de la suma de transaccions per IBAN de les targetes de crèdit
 /* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
 van ser declinades */
 CREATE TABLE last_card_movements AS							#4º Finalmente creo la tabla
-SELECT card_id, timestamp, declined,row_num						#2º Selecciono card_id, timestamp, declined y la columna row_num
-FROM (SELECT card_id, timestamp, declined,						#1º Hago la subconsulta con los datos que necesito y 
+SELECT card_id, timestamp, declined,						  #1º Hago la subconsulta con los datos que necesito y 
            ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num	# Con la funcion ROW NUMBER asigno el numero de fila a cada
     FROM transactions									# fila resultante de la consulta 
 ) AS ranked_transactions
