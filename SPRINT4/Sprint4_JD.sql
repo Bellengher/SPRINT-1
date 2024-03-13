@@ -16,37 +16,45 @@ WHERE total_transactions > 30;							# indicando que quiero las que sean mayor a
     
 /* Exercici 2
 Mostra la mitjana de la suma de transaccions per IBAN de les targetes de crèdit en la companyia Donec Ltd. utilitzant almenys 2 taules.*/
- SELECT * FROM transactions WHERE business_id = "b-2242";
- SELECT * FROM companies WHERE company_name = "Donec Ltd" ;   # company_id = b-2242
+
+SELECT * FROM companies WHERE company_name = "Donec Ltd" ;  					# company_id = 'b-2242'
+SELECT * FROM transactions WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
+SELECT * from credit_cards WHERE id = "CcU-2973";						#iban = 'PT87806228135092429456346'
+SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973' AND declined = 0 ;	#Aquí solo tengo en cuenta las transacciones aprobadas.
+SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973'  ;					#Aquí incluyo las aprobadas y rechazadas.
 
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
-							#NIVEL2
-	 
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+									
+								#NIVEL2
+									
 /* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
 van ser declinades */
-CREATE TABLE last_card_movements AS								#4º Finalmente creo la tabla
-SELECT *											#2º Selecciono card_id, timestamp, declined y la columna row_num de la subquery
-FROM (SELECT card_id, timestamp, declined,							#1º Hago la subquery con card_id, timestamp, declined y creo una columna
-           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num		# con la funcion ROW NUMBER asignando un numero de unico a cada 
-    FROM transactions										# fila resultante de la consulta 
-) AS ranked_transactions
-WHERE row_num <= 3;										#3º filtro con row_num <=3 porque nos pide analizar las 3 ultimas transacciones
+CREATE TABLE last_card_movements AS
+WITH card_status AS (
+    SELECT card_id, timestamp, declined,
+           ROW_NUMBER() OVER (PARTITION BY card_id ORDER BY timestamp DESC) AS row_num
+    FROM transactions
+)
+SELECT card_id,
+    CASE
+        WHEN SUM(declined) <= 2 THEN 'tarjeta operativa'
+        ELSE 'tarjeta no operativa'
+    END AS status
+FROM card_status
+WHERE row_num <= 3
+GROUP BY card_id
+HAVING COUNT(*) = 3;
 
-
-SELECT COUNT(DISTINCT card_id) FROM last_card_movements;	#TENEMOS 242 TARJETAS QUE HAN HECHO AL MENOS 1 OPERACIÓN
-
+SELECT count(DISTINCT card_id) FROM last_card_movements;	
 
 /* Quantes targetes estan actives? ***CONSIDERANDO ACTIVAS LAS TARJETAS QUE TIENEN AL MENOS 1 OPERACIÓN APROBADA EN LAS ULTIMAS 3 TRANSACCIONES
 (TAMBIÉN CONSIDERO LAS QUE TIENEN MENOS DE 3 OPERACIONES EN TOTAL) */
 
-SELECT COUNT(card_id) operating_cards 				#3º Hago un conteo de los id de tarjeta (poniendo un alías) de la subconsulta anterior	
-	FROM (SELECT card_id, declined 				#1º Seleccciono la columna con el id de la tarjeta y la que tiene las operaciones rechazadas
-		FROM last_card_movements 			# de la tabla que he creado anteriormente 
-        WHERE declined = 0 GROUP BY card_id) oc 		#2º Hago el flitro para que considere las que tienen al menos una op aprobada (declined=0)
-								# agrupando por el id de tarjeta
-;
+SELECT COUNT(card_id) as 'total tarjetas operativas'
+FROM last_card_movements 
+WHERE status = 'tarjeta operativa';
 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
