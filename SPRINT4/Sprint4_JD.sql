@@ -61,14 +61,21 @@ WHERE status = 'tarjeta operativa';
 
 
 								#NIVEL3
-
+/*Crea una taula amb la qual puguem unir les dades del nou arxiu products.csv amb la base de dades creada, 
+tenint en compte que des de transaction tens product_ids.*/
 									
-CREATE TABLE IF NOT EXISTS product (
-	id int,
-	product_name varchar (50) ,
-	price varchar (20) ,
-	colour varchar (20) ,
-	weight decimal (5,2) ,
-	warehouse_id varchar (10),
-	PRIMARY KEY (id)
-); 
+ CREATE TABLE product_transaction  (
+  id varchar (50) NOT NULL,
+  product_ids varchar (30) NOT NULL
+) ;
+
+
+/* Genera la següent consulta:
+Necessitem conèixer el nombre de vegades que s'ha venut cada producte.*/
+
+SELECT product_ids codigo_producto, COUNT(row_num) total_vendido FROM
+ (SELECT product_ids ,
+           ROW_NUMBER() OVER (PARTITION BY product_ids ) AS row_num
+    FROM product_transaction) dd
+GROUP BY product_ids
+ ;
