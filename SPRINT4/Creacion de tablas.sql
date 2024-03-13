@@ -100,8 +100,28 @@ ADD CONSTRAINT fk_user_id
 FOREIGN KEY (user_id)
 REFERENCES users(id);
 
-/*
-ALTER TABLE transactions
-ADD CONSTRAINT fk_products_id
-FOREIGN KEY (product_ids)
-REFERENCES products(id); */
+
+!!!!!!FALTA CREACION DE TABLA PRODUCTS!!!!!!!
+
+
+/*El proceso que se ha seguido ha sido : 
+1º He creado una tabla derivada de la tabla products que haga de nexo entre transactions y products a la cual he llamado product_transaction 
+y en la que he dejado unicamente dos campos que considero son los que necesito ( id , product_ids).
+2º Al no tener las primary keys he indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
+3º He declarado como foreign key los dos campos de esta nueva tabla y hago referencia hacia las tablas con las que quiero
+crear la relacion. En este punto estaba teniendo problemas ya que el DATA TYPE del id de products lo tenía en INT y era incompatible con 
+la columna que quería utilizar de foreign key ya que esta la tenía en VARCHAR. Lo que hice fue cambiar el DATA TYPE y listo. */
+
+#CREACIÓN DE INDICES
+ALTER TABLE product_transaction		#agrego indice a product_transaction.id
+ADD INDEX idx_id (id);
+
+ALTER TABLE product_transaction			#agrego indice a product_transaction.product_ids	
+ADD INDEX idx_product_ids (product_ids);
+
+#CREACION DE FOREIGN KEY'S
+ALTER TABLE product_transaction
+ADD FOREIGN KEY (id) REFERENCES transactions(id);   		#creo foreign key product_transaction----->transactions
+
+ALTER TABLE product_transaction
+ADD FOREIGN KEY (product_ids) REFERENCES products(id);		#creo foreign key product_transaction----->products
