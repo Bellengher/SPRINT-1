@@ -121,10 +121,10 @@ crear la relacion. En este punto estaba teniendo problemas ya que el DATA TYPE d
 la columna que quería utilizar de foreign key ya que esta la tenía en VARCHAR. Lo que hice fue cambiar el DATA TYPE y listo. */
 
 #CREACIÓN DE INDICES
-ALTER TABLE product_transaction		#agrego indice a product_transaction.id
+ALTER TABLE product_transaction					#agrego indice a product_transaction.id
 ADD INDEX idx_id (id);
 
-ALTER TABLE product_transaction			#agrego indice a product_transaction.product_ids	
+ALTER TABLE product_transaction					#agrego indice a product_transaction.product_ids	
 ADD INDEX idx_product_ids (product_ids);
 
 #CREACION DE FOREIGN KEY'S
