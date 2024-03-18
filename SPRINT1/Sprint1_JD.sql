@@ -90,6 +90,14 @@ AND amount BETWEEN 100 AND 200 							#4º pongo el filtro para que cuente los g
 GROUP BY company_name,phone,country 						#5º Agrupo por company_name,phone y country
 ORDER BY total DESC;								#6º Ordeno de manera descendente porque piden de mayor a menor
 
+!!!!CORRECCIÓN!!!!!
+
+SELECT company_name, phone, country, amount AS Total FROM company		#1º Selecciono company_name,phone,country y amount de tabla company
+JOIN transaction ON company.id = transaction.company_id 			#2º JOIN con transaction por P y F KEY
+WHERE transaction.declined = 0							#3º declined = 0 porque solo tomo en cuenta transacciones no rechazadas
+AND amount BETWEEN 100 AND 200 							#4º pongo el filtro para que cuente los gastos comprendidos entre 100 y 200.
+ORDER BY amount DESC;
+
 #Ejercicio 2 Indica el nom de les companyies que van fer compres el 16 de març del 2022, 28 de febrer del 2022 i 13 de febrer del 2022.
 	
 SELECT company_name ,timestamp FROM company							   #1º Selecciono company_name y timestamp de tabla company
