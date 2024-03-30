@@ -30,8 +30,9 @@ SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973'  ;					
 								#NIVEL2
 									
 /* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
-van ser declinades ( Solo tomo en cuenta aquellas tarjetas que tienen como mininmo 3 transaccciones hechas)*/
-
+van ser declinades ( Solo tomo en cuenta aquellas tarjetas que tienen como mininmo 3 transaccciones hechas).
+⚠️SI QUISIERA CONSIDERAR TODAS LAS TARJETAS (INCLUYENDO AQUELLAS QUE TIENEN MENOS DEL MÍNIMO DE 3 TRANSACCIONES HECHAS) SOLO TENDRÍA QUE QUITAR
+   LA PARTE FINAL DEL CÓDIGO ( HAVING COUNT(*) = 3 ) */
 
 CREATE TABLE last_card_movements AS				   #1º Creo la tabla last_card_movements
 WITH card_status AS (						   #2º Defino una CTE llamada card_status 
