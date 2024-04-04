@@ -1,4 +1,4 @@
-ROW CONTEXTE / CONTEXTO DE FILAS:
+
 Representa la fila actual en la que nos encontramos durante el proceso de iteración. 
 COLUMNAS CALCULADAS.
 FUNCIONES X 
@@ -23,7 +23,7 @@ FILTER(
       ventas[precio unitario] > 50
 )
 
-!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
+!!!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
 
 CREO LLAVES EN UNA TABLA A PARTIR DE LAS COLUMNAS ID_TIENDA Y ID_CLIENTE
 VENTASLLAVES = 
@@ -32,3 +32,10 @@ SELECTCOLUMNS(
       "Tienda", ventas[ID_tienda]
       "Cliente", ventas[ID_cliente]
       ¨Llave" , ventas[ID_tienda] & "/" & ventas[ID_cliente])
+!!!ADDCOLUMNS hace lo mismo pero mantiene la tabla original
+
+RELATED / RELATEDTABLE ....SE UTILIZAN CUANDO ESTOY EN UN CONTEXTO DE FILA
+RELATED EN EL LADO MUCHOS DE LA RELACIÓN
+RELATEDTABLE EN EL LADO UNO DE LA RELACIÓN
+
+
