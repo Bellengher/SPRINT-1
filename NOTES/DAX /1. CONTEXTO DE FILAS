@@ -19,8 +19,8 @@ MONTO DE VENTAS = SUMX(
 CONTEXTO DE FILAS: (BUSCA LOS ARTICULOS CON PRECIO UNITARIO MAYOR A 50 DE LA TABLA VENTAS)
 VENTASMAYORES50 =
 FILTER(
-      ventas,
-      ventas[precio unitario] > 50
+      fctVentas,
+      fctVentas[precio unitario] > 50
 )
 
 !!!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
@@ -29,13 +29,25 @@ CREO LLAVES EN UNA TABLA A PARTIR DE LAS COLUMNAS ID_TIENDA Y ID_CLIENTE
 VENTASLLAVES = 
 SELECTCOLUMNS(
       ventas,
-      "Tienda", ventas[ID_tienda]
-      "Cliente", ventas[ID_cliente]
-      ¨Llave" , ventas[ID_tienda] & "/" & ventas[ID_cliente])
+      "Tienda", fctVentas[ID_tienda]
+      "Cliente", fctVentas[ID_cliente]
+      ¨Llave" , fctVentas[ID_tienda] & "/" & fctVentas[ID_cliente])
 !!!ADDCOLUMNS hace lo mismo pero mantiene la tabla original
 
 RELATED / RELATEDTABLE ....SE UTILIZAN CUANDO ESTOY EN UN CONTEXTO DE FILA
 RELATED EN EL LADO MUCHOS DE LA RELACIÓN
 RELATEDTABLE EN EL LADO UNO DE LA RELACIÓN
+
+
++CREANDO UNA COLUMNA CALCULADA*
+PRECIO LISTA = 
+RELATED(dimProducto[Precio Lista])
+
+*CREANDO UNA MEDIDA*
+MONTO DE VENTA A PRECIO LISTA = 
+SUMX(
+    fctVentas,
+    fctVentas[Unidades] * RELATED(dimProducto[Precio Lista])
+)
 
 
