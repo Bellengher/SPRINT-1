@@ -1,4 +1,4 @@
-# **Bootcamp Data Analytics de IT Academy**
+# **Bootcamp Data Analytics  (IT Academy)**
 
 ## _MySQL Workbench_
 
