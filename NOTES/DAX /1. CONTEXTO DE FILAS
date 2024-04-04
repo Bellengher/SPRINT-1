@@ -6,16 +6,16 @@ FUNCIONES DE TABLA (FILTER,ADDCOLUMNS,SELECT COLUMNS,TOPN,GENERATE).
 FUNCIONES DE INTELIGENCIA DE TIEMPO (LASTNONBLANCK, FIRSTNONBLANK).
 
 REALED Y RELATED TABLE NO GENERAN UN CONTEXTO DE FILA PERO SI LO UTILIZAN JUNTO CON TODAS LAS FUNCIONES ANTERIORMENTE MENCIONADAS.
-
+--------------------------------------------------------------------------------------------------------------------------------------
 CREO UNA COLUMNA CALCULADA:
-MONTO DE VENTAS = ventas[unidades] * ventas[precio unitrio]
-
+MONTO DE VENTAS = fctVentas[unidades] * fctVentas[precio unitrio]
+--------------------------------------------------------------------------------------------------------------------------------------
 CREANDO MEDIDA: #Crea una columna virtual donde hace la función de iteración
 MONTO DE VENTAS = SUMX(
-                        ventas,
-                        ventas[unidades] * ventas[precio unitrio]
+                        fctVentas,
+                        fctVentas[unidades] * fctVentas[precio unitario]
                   )
-
+--------------------------------------------------------------------------------------------------------------------------------------
 CONTEXTO DE FILAS: (BUSCA LOS ARTICULOS CON PRECIO UNITARIO MAYOR A 50 DE LA TABLA VENTAS)
 VENTASMAYORES50 =
 FILTER(
@@ -24,7 +24,7 @@ FILTER(
 )
 
 !!!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
-
+--------------------------------------------------------------------------------------------------------------------------------------
 CREO LLAVES EN UNA TABLA A PARTIR DE LAS COLUMNAS ID_TIENDA Y ID_CLIENTE
 VENTASLLAVES = 
 SELECTCOLUMNS(
@@ -32,6 +32,7 @@ SELECTCOLUMNS(
       "Tienda", fctVentas[ID_tienda]
       "Cliente", fctVentas[ID_cliente]
       ¨Llave" , fctVentas[ID_tienda] & "/" & fctVentas[ID_cliente])
+--------------------------------------------------------------------------------------------------------------------------------------
 !!!ADDCOLUMNS hace lo mismo pero mantiene la tabla original
 
 RELATED / RELATEDTABLE ....SE UTILIZAN CUANDO ESTOY EN UN CONTEXTO DE FILA
@@ -42,12 +43,21 @@ RELATEDTABLE EN EL LADO UNO DE LA RELACIÓN
 +CREANDO UNA COLUMNA CALCULADA*
 PRECIO LISTA = 
 RELATED(dimProducto[Precio Lista])
-
-*CREANDO UNA MEDIDA*
+--------------------------------------------------------------------------------------------------------------------------------------
+*CREANDO UNA MEDIDA* 
 MONTO DE VENTA A PRECIO LISTA = 
 SUMX(
     fctVentas,
     fctVentas[Unidades] * RELATED(dimProducto[Precio Lista])
 )
+--------------------------------------------------------------------------------------------------------------------------------------
++CREANDO UNA COLUMNA CALCULADA*
+UNIDADES VENDIDAD = 
+SUMX(
+  RELATEDTABLE(fctVentas),
+  fctVentas[Unidades]
+)
+--------------------------------------------------------------------------------------------------------------------------------------
+
 
 
