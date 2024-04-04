@@ -1,0 +1,34 @@
+ROW CONTEXTE / CONTEXTO DE FILAS:
+Representa la fila actual en la que nos encontramos durante el proceso de iteración. 
+COLUMNAS CALCULADAS.
+FUNCIONES X 
+FUNCIONES DE TABLA (FILTER,ADDCOLUMNS,SELECT COLUMNS,TOPN,GENERATE).
+FUNCIONES DE INTELIGENCIA DE TIEMPO (LASTNONBLANCK, FIRSTNONBLANK).
+
+REALED Y RELATED TABLE NO GENERAN UN CONTEXTO DE FILA PERO SI LO UTILIZAN JUNTO CON TODAS LAS FUNCIONES ANTERIORMENTE MENCIONADAS.
+
+CREO UNA COLUMNA CALCULADA:
+MONTO DE VENTAS = ventas[unidades] * ventas[precio unitrio]
+
+CREANDO MEDIDA: #Crea una columna virtual donde hace la función de iteración
+MONTO DE VENTAS = SUMX(
+                        ventas,
+                        ventas[unidades] * ventas[precio unitrio]
+                  )
+
+CONTEXTO DE FILAS: (BUSCA LOS ARTICULOS CON PRECIO UNITARIO MAYOR A 50 DE LA TABLA VENTAS)
+VENTASMAYORES50 =
+FILTER(
+      ventas,
+      ventas[precio unitario] > 50
+)
+
+!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
+
+CREO LLAVES EN UNA TABLA A PARTIR DE LAS COLUMNAS ID_TIENDA Y ID_CLIENTE
+VENTASLLAVES = 
+SELECTCOLUMNS(
+      ventas,
+      "Tienda", ventas[ID_tienda]
+      "Cliente", ventas[ID_cliente]
+      ¨Llave" , ventas[ID_tienda] & "/" & ventas[ID_cliente])
