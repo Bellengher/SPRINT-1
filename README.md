@@ -1,6 +1,6 @@
-#**Bootcamp Data Analytics de IT Academy**
+# **Bootcamp Data Analytics de IT Academy**
 
-##_MySQL Workbench_
+## _MySQL Workbench_
 
 Sprint 1: Nociones básicas i componentes clave en el diseño de bases de datos relacionales
 
@@ -10,7 +10,7 @@ Sprint 3: Gestión de tablas, índices y vistas
 
 Sprint 4: Creación y modelado de base de datos
 
-##_Power BI Desktop_
+## _Power BI Desktop_
 
 Sprint 5: Iniciación al análisis de datos con Power BI e indicadores
 
