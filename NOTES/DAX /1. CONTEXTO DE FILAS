@@ -8,16 +8,16 @@ FUNCIONES DE INTELIGENCIA DE TIEMPO (LASTNONBLANCK, FIRSTNONBLANK).
 REALED Y RELATED TABLE NO GENERAN UN CONTEXTO DE FILA PERO SI LO UTILIZAN JUNTO CON TODAS LAS FUNCIONES ANTERIORMENTE MENCIONADAS.
 --------------------------------------------------------------------------------------------------------------------------------------
 CREO UNA COLUMNA CALCULADA:
-MONTO DE VENTAS = fctVentas[unidades] * fctVentas[precio unitrio]
+💻 MONTO DE VENTAS = fctVentas[unidades] * fctVentas[precio unitrio]
 --------------------------------------------------------------------------------------------------------------------------------------
 CREANDO MEDIDA: #Crea una columna virtual donde hace la función de iteración
-MONTO DE VENTAS = SUMX(
+💻 MONTO DE VENTAS = SUMX(
                         fctVentas,
                         fctVentas[unidades] * fctVentas[precio unitario]
                   )
 --------------------------------------------------------------------------------------------------------------------------------------
 CONTEXTO DE FILAS: (BUSCA LOS ARTICULOS CON PRECIO UNITARIO MAYOR A 50 DE LA TABLA VENTAS)
-VENTASMAYORES50 =
+💻 VENTASMAYORES50 =
 FILTER(
       fctVentas,
       fctVentas[precio unitario] > 50
@@ -26,7 +26,7 @@ FILTER(
 !!!CALCULATETABLE hace lo mismo pero no hace la funcion fila por fila si no de toda la tabla.
 --------------------------------------------------------------------------------------------------------------------------------------
 CREO LLAVES EN UNA TABLA A PARTIR DE LAS COLUMNAS ID_TIENDA Y ID_CLIENTE
-VENTASLLAVES = 
+💻 VENTASLLAVES = 
 SELECTCOLUMNS(
       ventas,
       "Tienda", fctVentas[ID_tienda]
@@ -41,18 +41,18 @@ RELATEDTABLE EN EL LADO UNO DE LA RELACIÓN
 
 
 +CREANDO UNA COLUMNA CALCULADA*
-PRECIO LISTA = 
+💻 PRECIO LISTA = 
 RELATED(dimProducto[Precio Lista])
 --------------------------------------------------------------------------------------------------------------------------------------
 *CREANDO UNA MEDIDA* 
-MONTO DE VENTA A PRECIO LISTA = 
+💻 MONTO DE VENTA A PRECIO LISTA = 
 SUMX(
     fctVentas,
     fctVentas[Unidades] * RELATED(dimProducto[Precio Lista])
 )
 --------------------------------------------------------------------------------------------------------------------------------------
 +CREANDO UNA COLUMNA CALCULADA*
-UNIDADES VENDIDAD = 
+💻 UNIDADES VENDIDAD = 
 SUMX(
   RELATEDTABLE(fctVentas),
   fctVentas[Unidades]
