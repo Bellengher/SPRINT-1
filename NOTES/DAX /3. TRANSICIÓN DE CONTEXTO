@@ -6,18 +6,18 @@ APLICARÁ AL MODELO DURANTE LA EVALUACIÓN DE UNA EXPRESIÓN EN DAX.
 
 TRANSICION DE CONTEXTO EN COLUMNAS CALCULADAS
 
-MONTO PRODUCTO = CALCULATE(SUM(fctVentas[Monto de Ventas]))
+💻 MONTO PRODUCTO = CALCULATE(SUM(fctVentas[Monto de Ventas]))
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
 
 TRANSICION DE CONTEXTO EN TABLAS
 
-dimCliente > 7 Unidades = 
-FILTER(
-      dimCliente,
-      CALCULATE(SUM(fctVentas[Unidades])) > 7
-)
+💻 dimCliente > 7 Unidades = 
+               FILTER(
+                  dimCliente,
+                  CALCULATE(SUM(fctVentas[Unidades])) > 7
+   )
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
