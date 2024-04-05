@@ -14,12 +14,37 @@ TRANSICION DE CONTEXTO EN COLUMNAS CALCULADAS
 TRANSICION DE CONTEXTO EN TABLAS
 
 💻 dimCliente > 7 Unidades = 
-               FILTER(
-                  dimCliente,
-                  CALCULATE(SUM(fctVentas[Unidades])) > 7
+   FILTER(
+   dimCliente,
+   CALCULATE(SUM(fctVentas[Unidades])) > 7
+   )
+
+--------------------------------------------------------------------------------------------------------------------------------------
+💻 Monto de Venta de los Clientes > 7 unidades =
+   CALCULATE(
+        [Monto de Ventas],
+        FILTER(
+            dimCliente,
+            CALCULATE(SUM(fctVentas[Unidades])) > 7
+        )
    )
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
 
 TRANSICION DE CONTEXTO EN MEDIDAS
+
+💻 Numero de CLientes Rev =
+   SUMX(
+       VALUES(dimCalendario[Mes Año]),
+       [Numero de Clientes]
+   )
+
+--------------------------------------------------------------------------------------------------------------------------------------
+(Técnica de Reducción de Granuralidad))
+
+Monto de VEnta mejor dia =
+💻 MAXX(
+       VALUES(dimCalendario[Fecha]),
+       [Monto de Ventas]          --------->  = 💻 Monto de Ventas = SUM(fctVentas[Monto de Ventas])
+   )
