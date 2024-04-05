@@ -9,60 +9,60 @@ Se crean con CALCULATE(MEDIDAS) Y CALCULATETABLES(tablas)
 --------------------------------------------------------------------------------------------------------------------------------------
 COMTEXTO DE FILTRO EN MEDIDAS
 
-MONTO DE VENTAS = SUM(fctVentas[Monto de Ventas])    -------> Suma los valores de monto de ventas
+💻 MONTO DE VENTAS = SUM(fctVentas[Monto de Ventas])    -------> Suma los valores de monto de ventas
 
-MONTO DE VENTAS = COUNTROWS(fctVentas)  -----> Cuentas las filas de ventas
+💻 MONTO DE VENTAS = COUNTROWS(fctVentas)  -----> Cuentas las filas de ventas
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
 CONTEXTO DE FILTRO EN TABLAS
 
-dimProducto (TC) = 
-FILTER(                                    ------> ESTO NO MODIFICA EL CONTEXTO DE FILTRO
-    dimProducto,
-    dimProducto[Precio Lista] > 60
-)
+💻 dimProducto (TC) = 
+   FILTER(                                    ------> ESTO NO MODIFICA EL CONTEXTO DE FILTRO
+        dimProducto,
+        dimProducto[Precio Lista] > 60
+   )
 --------------------------------------------------------------------------------------------------------------------------------------
-dimProducto (TC) = 
-CALCULATETABLE(                            ------> ESTO SI MODIFICA EL CONTAXTO DE FILTRO
-    dimProducto,
-    dimProducto[Precio Lista] > 60
-)
+💻 dimProducto (TC) = 
+   CALCULATETABLE(                            ------> ESTO SI MODIFICA EL CONTAXTO DE FILTRO
+        dimProducto,
+        dimProducto[Precio Lista] > 60
+   )
 --------------------------------------------------------------------------------------------------------------------------------------
 
-MARCAS = VALUES(fctVentas[ID_Producto])
+💻 MARCAS = VALUES(fctVentas[ID_Producto])
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
 Nro productos vendidos =
-COUNTROWS(VALUES(fctVentas[ID_Producto])  -----> Crea una tabla virtual de la columna id_producto con los distintos valores 
+💻 COUNTROWS(VALUES(fctVentas[ID_Producto])  -----> Crea una tabla virtual de la columna id_producto con los distintos valores 
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
 CONTEXTO DE FILTRO + CONTEXTO DE FILAS
 
-Nro Registros > 2 Unidades =
-COUNTROWS(
-      FILTER(
-          fctVentas,
-          fctVentas[Unidades] > 2
-)
+💻 Nro Registros > 2 Unidades =
+   COUNTROWS(
+          FILTER(
+              fctVentas,
+              fctVentas[Unidades] > 2
+   )
 --------------------------------------------------------------------------------------------------------------------------------------
-MONTO DE VENTAS = 
-SUMX(
-    fctVentas,
-    fctVentas[Unidades] * fctVentas[Precio Unitario]
-)
+💻 MONTO DE VENTAS = 
+   SUMX(
+            fctVentas,
+            fctVentas[Unidades] * fctVentas[Precio Unitario]
+   )
 
 --------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------
 CALCULATE: PERMITE MODIFICAR EL CONTEXTO DE FILTRO.
 
-Monto de ventas Asia =
-CALCULATE(
-        [MONTO DE VENTAS],
-          dimCliente[Continente] = "Asia"
-)
+💻 Monto de ventas Asia =
+   CALCULATE(
+            [MONTO DE VENTAS],
+             dimCliente[Continente] = "Asia"
+   )
 
 
 
