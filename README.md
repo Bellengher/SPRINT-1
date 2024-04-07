@@ -15,3 +15,7 @@ Sprint 4: Creación y modelado de base de datos
 Sprint 5: Power BI introducción e indicadores
 
 Sprint 6: Visualizaciones e informes con Power BI
+
+## _Python_
+
+Sprint 7: Nociones básicas
