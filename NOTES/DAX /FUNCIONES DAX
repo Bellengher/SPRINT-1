@@ -1,0 +1,93 @@
+# SUM
+Sintaxis: SUM(<columna>)
+Descripción: Calcula la suma de los valores en una columna.
+
+# AVERAGE
+Sintaxis: AVERAGE(<columna>)
+Descripción: Calcula el promedio de los valores en una columna.
+
+COUNT
+Sintaxis: COUNT(<expresión>)
+Descripción: Cuenta el número de filas en una tabla o el número de valores no vacíos en una columna.
+
+MAX
+Sintaxis: MAX(<columna>)
+Descripción: Devuelve el valor máximo en una columna.
+
+MIN
+Sintaxis: MIN(<columna>)
+Descripción: Devuelve el valor mínimo en una columna.
+
+FILTER
+Sintaxis: FILTER(<tabla>, <expresión>)
+Descripción: Retorna una tabla que contiene solo las filas que satisfacen los criterios especificados.
+
+RELATED
+Sintaxis: RELATED(<columna_relacionada>)
+Descripción: Retorna el valor de una columna relacionada a través de una relación definida entre tablas.
+
+CALCULATE
+Sintaxis: CALCULATE(<expresión>, <filtros>)
+Descripción: Evalúa una expresión en un contexto modificado, aplicando filtros adicionales.
+
+ALL
+Sintaxis: ALL(<tabla>)
+Descripción: Retorna todas las filas en una tabla o todas las filas en una columna, ignorando los filtros de contexto.
+
+RELATEDTABLE
+Sintaxis: RELATEDTABLE(<tabla_relacionada>)
+Descripción: Retorna todas las filas de una tabla relacionada a través de una relación definida.
+
+SWITCH
+Sintaxis: SWITCH(<expresión>, <valor1>, <resultado1>, <valor2>, <resultado2>, ...)
+Descripción: Evalúa una lista de expresiones y devuelve un valor correspondiente a la primera expresión que se evalúa como verdadera.
+
+SUMX
+Sintaxis: SUMX(<tabla>, <expresión>)
+Descripción: Itera sobre cada fila de una tabla, evalúa una expresión y luego suma los resultados.
+
+DATATABLE
+Sintaxis: DATATABLE(<columnas>)
+Descripción: Crea una tabla virtual con columnas definidas por el usuario.
+
+COUNTROWS
+Sintaxis: COUNTROWS(<tabla>)
+Descripción: Cuenta el número de filas en una tabla o en un contexto de filtro.
+
+DISTINCT
+Sintaxis: DISTINCT(<expresión>)
+Descripción: Retorna una tabla que contiene valores únicos de una columna o una expresión.
+
+TOPN
+Sintaxis: TOPN(<n>, <tabla>, <expresión>, [<orden>])
+Descripción: Retorna las primeras N filas de una tabla, clasificadas según una expresión y un orden opcional.
+
+RANKX
+Sintaxis: RANKX(<tabla>, <expresión>, [<valor>[, <orden>[, <orden de empate>]]])
+Descripción: Asigna un rango a cada fila en una tabla, basado en los valores de una expresión, con opciones para manejar empates.
+
+DATEADD
+Sintaxis: DATEADD(<fecha>, <n>, <unidad>)
+Descripción: Devuelve una nueva fecha aumentada o disminuida en un número de intervalos específico (días, meses, años, etc.).
+
+DATEDIFF
+Sintaxis: DATEDIFF(<fecha_inicio>, <fecha_fin>, <unidad>)
+Descripción: Calcula la diferencia entre dos fechas en unidades de tiempo especificadas (días, meses, años, etc.).
+
+CONCATENATEX
+Sintaxis: CONCATENATEX(<tabla>, <expresión>, [<delimitador>])
+Descripción: Concatena los valores de una expresión para cada fila en una tabla, separados por un delimitador opcional.
+
+GROUPBY
+Sintaxis: GROUPBY(<tabla>, <columnas agrupadas>, [<nombres de columna>[, <expresión1>[, <expresión2>, ...]]])
+Descripción: Agrupa los datos de una tabla según los valores de una o más columnas y calcula agregados para cada grupo.
+
+RELATEDTOPN
+Sintaxis: RELATEDTOPN(<n>, <tabla_relacionada>, <expresión>, [<orden>])
+Descripción: Retorna las primeras N filas de una tabla relacionada, clasificadas según una expresión y un orden opcional.
+
+SUMMARIZE
+Sintaxis: SUMMARIZE(<tabla>, <columnas agrupadas>, [<nombres de columna>[, <expresión1>[, <expresión2>, ...]]])
+Descripción: Crea una tabla resumida que resume los datos según las columnas especificadas, con la opción de agregar nuevas 
+columnas calculadas basadas en expresiones.
+La función agrupa los datos según los valores únicos de las columnas de agrupación especificadas y luego calcula agregados para cada grupo.
