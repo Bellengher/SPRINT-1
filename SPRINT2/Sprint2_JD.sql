@@ -71,32 +71,6 @@ HAVING media_pais > (			 						#4º utilizo Having para indicar que tome la medi
  per la qual cosa et demanen la informació sobre la quantitat de transaccions que realitzen les empreses, però el departament de recursos humans és exigent 
  i vol un llistat de les empreses on especifiquis si tenen més de 4 transaccions o menys.*/
 
-SELECT id,company_name,phone,email,country,website,conteo,									#4º Finalmente le indico los datos que quiero mostrar a los que se agregará el CASE
-CASE WHEN conteo > 4 THEN "Mas de 4 transacciones"										#3º con un CASE hago la condicion si conteo > 4 y asigno las respuestas
-     WHEN conteo = 4 THEN "Justo 4 transacciones"										# Por si alguno tiene justo 4 transacciones
-	ELSE "Menos de 4 transacciones"
-END AS total_transacciones
- FROM
-(SELECT * FROM company JOIN 													#2º hago JOIN con *company para tener los datos de las empresas
-(SELECT company_id, COUNT(id) As conteo FROM transaction WHERE declined = 0 GROUP BY company_id) AS transacciones_finalizadas	
- ON company.id = company_id) AS d
- ;
-
- SELECT company.* , transacciones_finalizadas.conteo,										#2 Selecciono todo de company y 
-       CASE 
-           WHEN transacciones_finalizadas.conteo > 4 THEN "Mas de 4 transacciones"
-           WHEN transacciones_finalizadas.conteo = 4 THEN "Justo 4 transacciones"
-           ELSE "Menos de 4 transacciones"
-       END AS total_transacciones
-FROM company , 
-    (SELECT company_id, COUNT(id) AS conteo 											#1º cuenta transacciones finalizadas por company_id
-     FROM transaction 
-     WHERE declined = 0 													# teniendo en cuenta como finalizadas aquellas que son declined = 0
-     GROUP BY company_id) AS transacciones_finalizadas										# y agrupando por el company_id
-WHERE company.id = transacciones_finalizadas.company_id
-;
-
-
 SELECT company.* , tf.conteo,					#2º Selecciono todos los campos de company y el campo conteo la tabla tf									
        CASE 							#3º con Case hago la evaluacion respecto al conteo	
            WHEN conteo > 4 THEN "Mas de 4 transacciones"
