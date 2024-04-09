@@ -57,11 +57,6 @@ SELECT company_id FROM transaction WHERE company_id NOT IN 					#3º busca las c
   per la qual cosa necessiten una base sòlida per a avaluar el rendiment i mesurar l'èxit en els diferents mercats. 
   Per a això, necessiten el llistat dels països la mitjana de transaccions dels quals sigui superior a la mitjana general.*/
 
-SELECT country, ROUND(AVG(amount),2) AS media_pais FROM company 						#2º selecciono country de company y media_pais de transaction
-	JOIN transaction ON company.id = company_id WHERE declined = 0 GROUP BY country HAVING media_pais >  	# haciendo JOIN tomando solo declined=0 y agrupando por country haciendo Having para que me filtre las que sean mayores a la media general	
-		(SELECT AVG(amount) FROM transaction As media_genral WHERE declined = 0 )			#1º busco la media general de transaction
- ;
-
 SELECT company.country, ROUND(AVG(transaction.amount), 2) AS media_pais			#1º Selecciono nombre de país y media de amount , utilizo round para dejarlo en 2 desimales.
 FROM company, transaction								# de las tablas comnay,transaction
 WHERE company.id = transaction.company_id						# indicando los id que mantienen las relacion.
