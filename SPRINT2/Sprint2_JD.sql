@@ -20,9 +20,10 @@ GROUP BY company_id)) 								#4º agrupo por company_id
 /*Ejercicio 3 El departament de comptabilitat va perdre la informació de les transaccions realitzades per una empresa, 
  però no recorden el seu nom, només recorden que el seu nom iniciava amb la lletra c. Com els pots ajudar? Comenta-ho acompanyant-ho de la informació de les transaccions.*/ 
 
-SELECT compañia.company_name, transaction.* FROM transaction  JOIN 							#2ª selecciono en company_name del 1º filtro * de transaction para hacer una JOIN
-	(SELECT id,company_name FROM company WHERE company_name LIKE "c%") AS compañia ON compañia.id = company_id	#1º busco las company_name que empiecen por "c%" y pongo un alias
-; 
+SELECT
+(SELECT company_name FROM company WHERE id = transaction.company_id) AS company_name, transaction.*	2º Selecciono el nombre de la compañía de la tabla company
+	FROM TRANSACTION 										# y todo de la tabla transaction y hago la busqueda dentro del primer filtro.
+    WHERE  transaction.company_id IN (SELECT id FROM company WHERE company_name LIKE 'c%');		1º Hago la búsqueda de las compañías cuyo nombre comienza por c
 
 #Ejercicio 4 Van eliminar del sistema les empreses que no tenen transaccions registrades, lliura el llistat d'aquestes empreses.
 
