@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 
 
-#2º Creo la tabla users donde voy a unificar los 3 archivos csv de usuarios
+#2º Creo la tabla dimensión users donde voy a unificar los 3 archivos csv de usuarios ya que después de analizarlos se observa que es viable.
 
 CREATE TABLE IF NOT EXISTS users (
     	id INT,
@@ -100,26 +100,33 @@ ADD CONSTRAINT fk_user_id
 FOREIGN KEY (user_id)
 REFERENCES users(id);
 
+	❗️PARA PODER ESTABLECER LA RELACION CON LA TABLA PRODUCTS HE TENIDO QUE CREAR UNA TABLA PUENTE 
+		ENTRE LAS TABLAS TRANSACTIONS Y PRODUCT A LA QUE HE LLAMADO PRODUCT_TRANSACTION.
+  	HE OPTADO POR ESTA OPCION YA QUE EN TRANSACTIONS EN EL CAMPO PRODUCTS_ID HAY MAS DE UN ID EN MUCHOS CASOS SEPARADOS POR ,
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-***CREACION DE FOREIGN KEYS DE LA TABLA PRODUCTS***
-
 /*El proceso que se ha seguido ha sido : 
 1º He creado una tabla derivada de la tabla products que haga de nexo entre transactions y products a la cual he llamado product_transaction 
 y en la que he dejado unicamente dos campos que considero son los que necesito ( id , product_ids).*/
-	
+----------------------------------------------------------------------------------------------------------------------------------------------------------	
   CREATE TABLE product_transaction (
   id varchar(50) NOT NULL,
   product_ids int NOT NULL
   );
-
-
+❗️Los datos para esta tabla los he obtenido de la siguiente manera:
+	1º Cargo el CSV de la tabla transactions
+	2º Elimino las columnas que no voy a utilizar hasta quedarme sólo con id y products_id
+	3º Cargo el archivo CSV en algúna herramienta que me permita separar el campo products_id separados por , en distintas filas.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 2º Al no tener las primary keys he indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
 3º He declarado como foreign key los dos campos de esta nueva tabla y hago referencia hacia las tablas con las que quiero
 crear la relacion. En este punto estaba teniendo problemas ya que el DATA TYPE del id de products lo tenía en INT y era incompatible con 
 la columna que quería utilizar de foreign key ya que esta la tenía en VARCHAR. Lo que hice fue cambiar el DATA TYPE y listo. */
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Ahora que ya tengo las columnas deseadas para poder establecer las relaciones procedo a ello creando indices y posteriormente 
+declarando las foreign keys.
+	
 #CREACIÓN DE INDICES
 ALTER TABLE product_transaction					#agrego indice a product_transaction.id
 ADD INDEX idx_id (id);
@@ -133,3 +140,6 @@ ADD FOREIGN KEY (id) REFERENCES transactions(id);   		#creo foreign key product_
 
 ALTER TABLE product_transaction
 ADD FOREIGN KEY (product_ids) REFERENCES products(id);		#creo foreign key product_transaction----->products
+
+
+❗LA CARGA DE TODOS LOS DATOS A LAS TABLAS CREADAS LA HICE POR MEDIO DEL WIZZARD DE WORKBENCH.
