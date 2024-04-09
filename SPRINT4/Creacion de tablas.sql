@@ -119,7 +119,7 @@ y en la que he dejado unicamente dos campos que considero son los que necesito (
 	3º Cargo el archivo CSV en algúna herramienta que me permita separar el campo products_id separados por , en distintas filas.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
-2º Al no tener las primary keys he indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
+2º He indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
 3º He declarado como foreign key los dos campos de esta nueva tabla y hago referencia hacia las tablas con las que quiero
 crear la relacion. En este punto estaba teniendo problemas ya que el DATA TYPE del id de products lo tenía en INT y era incompatible con 
 la columna que quería utilizar de foreign key ya que esta la tenía en VARCHAR. Lo que hice fue cambiar el DATA TYPE y listo. */
