@@ -62,6 +62,16 @@ SELECT country, ROUND(AVG(amount),2) AS media_pais FROM company 						#2º selec
 		(SELECT AVG(amount) FROM transaction As media_genral WHERE declined = 0 )			#1º busco la media general de transaction
  ;
 
+SELECT company.country, ROUND(AVG(transaction.amount), 2) AS media_pais			#1º Selecciono nombre de país y media de amount , utilizo round para dejarlo en 2 desimales.
+FROM company, transaction								# de las tablas comnay,transaction
+WHERE company.id = transaction.company_id						# indicando los id que mantienen las relacion.
+    AND transaction.declined = 0							#2º Utilizo declined = 0 para tomar las transacciones no rechazadas.
+GROUP BY company.country								#3º agrupo por nombre de país. 
+HAVING media_pais > (			 						#4º utilizo Having para indicar que tome la media_pais que sea 
+        SELECT AVG(amount)								# mayor a la media general del campo amount de transaction
+        FROM transaction
+        WHERE declined = 0								# indicando declined = 0 para que no tome las transacciones rechazadas.
+    );
 /*Ejercico 2 Necessitem optimitzar l'assignació dels recursos i dependrà de la capacitat operativa que es requereixi,
  per la qual cosa et demanen la informació sobre la quantitat de transaccions que realitzen les empreses, però el departament de recursos humans és exigent 
  i vol un llistat de les empreses on especifiquis si tenen més de 4 transaccions o menys.*/
