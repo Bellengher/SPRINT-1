@@ -25,6 +25,8 @@ SELECT
 	FROM TRANSACTION 										# y todo de la tabla transaction y hago la busqueda dentro del primer filtro.
     WHERE  transaction.company_id IN (SELECT id FROM company WHERE company_name LIKE 'c%');		1º Hago la búsqueda de las compañías cuyo nombre comienza por c
 
+
+									
 #Ejercicio 4 Van eliminar del sistema les empreses que no tenen transaccions registrades, lliura el llistat d'aquestes empreses.
 
 SELECT id,company_name FROM company 						#1º busca las id y company_name de la tabla company 
