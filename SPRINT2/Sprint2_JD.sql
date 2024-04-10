@@ -10,15 +10,15 @@ SELECT * FROM transaction WHERE company_id IN          		#2º Busca las transacc
 /*Ejercicio 2 Màrqueting està preparant alguns informes de tancaments de gestió, 
  et demanen que els passis un llistat de les empreses que han realitzat transaccions per una suma superior a la mitjana de totes les transaccions.*/
 
-SELECT * FROM company WHERE company.id In 					#3º busca * datos de las compañias que cumplan 2º filtro
+SELECT * FROM company WHERE company.id In 					3º busca * datos de las compañias que cumplan 2º filtro
 	(SELECT company_id  FROM transaction WHERE amount > 		 	#2º busca company_id sobre amount que sea mayor al 1º filtro
-		(SELECT AVG(amount) FROM transaction WHERE declined = 0)	#1º busco la media de las ventas (declined=0 considerando solo ventas finalizadas). 
-GROUP BY company_id) 								#4º agrupo por company_id
+		(SELECT AVG(amount) FROM transaction WHERE declined = 0))	#1º busco la media de las ventas (declined=0 considerando solo ventas finalizadas). 
 ;
 
 
 /*Ejercicio 3 El departament de comptabilitat va perdre la informació de les transaccions realitzades per una empresa, 
  però no recorden el seu nom, només recorden que el seu nom iniciava amb la lletra c. Com els pots ajudar? Comenta-ho acompanyant-ho de la informació de les transaccions.*/ 
+⚠️ Para ayudar al departamento de mkt le haré una lista donde aparezca tanto el nombre de la compañía como la información de las transacciones
 
 SELECT
 (SELECT company_name FROM company WHERE id = transaction.company_id) AS company_name, transaction.*	2º Selecciono el nombre de la compañía de la tabla company
@@ -27,9 +27,9 @@ SELECT
 
 #Ejercicio 4 Van eliminar del sistema les empreses que no tenen transaccions registrades, lliura el llistat d'aquestes empreses.
 
-SELECT company_id FROM transaction WHERE company_id NOT IN 					#3º busca las company_id que no estén en el 2º filtro
-	(SELECT company_id FROM 								#2º filtra las company_id que están en el 1º filtro
-		(SELECT COUNT(id) FROM transaction GROUP BY company_id) AS count_transaction) 	#1º cuenta id de transacciones y agrupa por company_id
+SELECT id,company_name FROM company 						#1º busca las id y company_name de la tabla company 
+	WHERE id NOT IN 							# que no estén
+	(SELECT company_id FROM transaction)					# en el campo company_id de la tabla transaction
 ;
 
 
@@ -71,16 +71,16 @@ HAVING media_pais > (			 						#4º utilizo Having para indicar que tome la medi
  per la qual cosa et demanen la informació sobre la quantitat de transaccions que realitzen les empreses, però el departament de recursos humans és exigent 
  i vol un llistat de les empreses on especifiquis si tenen més de 4 transaccions o menys.*/
 
-SELECT company.* , tf.conteo,					#2º Selecciono todos los campos de company y el campo conteo la tabla tf									
+SELECT company.* , tfinalizadas.conteo,				#2º Selecciono todos los campos de company y el campo conteo la tabla tfinalizadas									
        CASE 							#3º con Case hago la evaluacion respecto al conteo	
            WHEN conteo > 4 THEN "Mas de 4 transacciones"
            WHEN conteo = 4 THEN "Justo 4 transacciones"
            ELSE "Menos de 4 transacciones"
        END AS total_transacciones
-FROM company , 							# de las tablas company y tf
+FROM company , 							# de las tablas company y tfinalizadas
     (SELECT company_id, COUNT(id) AS conteo 											
      FROM transaction 
      WHERE declined = 0 													
-     GROUP BY company_id) AS tf					#1º Hago una tabla derivada llamada tf formada por las columnas company_id y conteo y agrupo por company_id								
-WHERE company.id = tf.company_id				#4º Indicando la relacion entre tablas.
+     GROUP BY company_id) AS tfinalizadas					#1º Hago una tabla derivada llamada tfinalizadas formada por las columnas company_id y conteo y agrupo por company_id								
+WHERE company.id = tfinalizadas_id				#4º Indicando la relacion entre tablas.
 ;
