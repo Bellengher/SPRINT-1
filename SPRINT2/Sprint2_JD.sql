@@ -2,18 +2,18 @@
 
 #Ejercicio 1 Mostra totes les transaccions realitzades per empreses d'Alemanya.
 
-(SELECT * FROM transaction WHERE company_id IN          	#2º Busca las transacciones teniendo en cuenta el 1º filtro
-	(SELECT id FROM company WHERE country = "Germany")) 	#1º filtra todas las empresas de Germany
+SELECT * FROM transaction WHERE company_id IN          		#2º Busca las transacciones teniendo en cuenta el 1º filtro
+	(SELECT id FROM company WHERE country = "Germany")	#1º filtra todas las empresas de Germany
 ;
 
 
 /*Ejercicio 2 Màrqueting està preparant alguns informes de tancaments de gestió, 
  et demanen que els passis un llistat de les empreses que han realitzat transaccions per una suma superior a la mitjana de totes les transaccions.*/
 
-(SELECT * FROM company WHERE company.id In 					#3º busca * datos de las compañias que cumplan 2º filtro
+SELECT * FROM company WHERE company.id In 					#3º busca * datos de las compañias que cumplan 2º filtro
 	(SELECT company_id  FROM transaction WHERE amount > 		 	#2º busca company_id sobre amount que sea mayor al 1º filtro
 		(SELECT AVG(amount) FROM transaction WHERE declined = 0)	#1º busco la media de las ventas (declined=0 considerando solo ventas finalizadas). 
-GROUP BY company_id)) 								#4º agrupo por company_id
+GROUP BY company_id) 								#4º agrupo por company_id
 ;
 
 
