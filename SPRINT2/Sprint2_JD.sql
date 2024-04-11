@@ -47,9 +47,11 @@ SELECT * FROM transaction  WHERE company_id IN 						#3º muestra lista de * tra
  
  #Ejercicio 2  El departament de comptabilitat necessita que trobis l'empresa que ha realitzat la transacció de major suma en la base de dades.
  
- SELECT * FROM company WHERE id IN 				#3º Muestro toda la informacion de company utilizando el 2º filtro
-	(SELECT company_id FROM transaction WHERE amount IN 	#2º Busco el company_id que coincida con el 1º filtro
-		(SELECT MAX(amount) FROM transaction) )		#1º Busco el MAX(amount)
+SELECT max(amount) , tabla.* FROM transaction ,					#4º selecciono el mñaximo importe de transaction y todo lo de la tabla derivada que he creado
+  (SELECT * FROM company WHERE id IN 						#3º Utlizo toda le información de company que esté dentro de los filtros anteriores para crear una tabla derivada
+	(SELECT company_id FROM transaction WHERE amount IN 			#2º Busco el company_id que coincida con el 1º filtro
+		(SELECT MAX(amount) FROM transaction) )) as tabla		#1º Busco el MAX(amount)
+ GROUP BY id
  ;
  
  
