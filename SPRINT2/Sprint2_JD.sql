@@ -40,16 +40,16 @@ SELECT id,company_name FROM company 						#1º busca las id y company_name de la
 /*Ejercicio 1 En la teva empresa, es planteja un nou projecte per a llançar algunes campanyes publicitàries per a fer competència a la companyia non institute. 
  Per a això, et demanen la llista de totes les transaccions realitzades per empreses que estan situades en el mateix país que aquesta companyia.*/
 
-(SELECT * FROM transaction  WHERE company_id IN 					#3º muestra lista de * transaction utilizando 2º filtro
+SELECT * FROM transaction  WHERE company_id IN 						#3º muestra lista de * transaction utilizando 2º filtro
 	(SELECT id FROM company WHERE country IN  					#2º busca los id de company utilizando 1º filtro
-		(SELECT country FROM company WHERE company_name = "non institute"))) 	#1º encuentra el country de Non Institue
+		(SELECT country FROM company WHERE company_name = "non institute")) 	#1º encuentra el country de Non Institue
  ;
  
  #Ejercicio 2  El departament de comptabilitat necessita que trobis l'empresa que ha realitzat la transacció de major suma en la base de dades.
  
- (SELECT * FROM company WHERE id IN 				#3º Muestro toda la informacion de company utilizando el 2º filtro
+ SELECT * FROM company WHERE id IN 				#3º Muestro toda la informacion de company utilizando el 2º filtro
 	(SELECT company_id FROM transaction WHERE amount IN 	#2º Busco el company_id que coincida con el 1º filtro
-		(SELECT MAX(amount) FROM transaction) ))	#1º Busco el MAX(amount)
+		(SELECT MAX(amount) FROM transaction) )		#1º Busco el MAX(amount)
  ;
  
  
