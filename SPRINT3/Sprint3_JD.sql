@@ -2,10 +2,10 @@
 
 
 										
-/*Exercicio 1 La teva tasca és dissenyar i crear una taula anomenada "credit_*card" que emmagatzemi detalls crucials sobre les targetes de crèdit. 
-La nova taula ha de ser capaç d'identificar de manera única cada targeta i establir una relació adequada amb les altres dues taules ("transaction" i "company"). 
-Després de crear la taula serà necessari que ingressis la informació del document denominat "dades_introduir_credit". 
-Recorda mostrar el diagrama i realitzar una breu descripció d'aquest.*/
+/*Ejercicio 1 Tu tarea es diseñar y crear una tabla llamada "credit_*card" que almacene detalles cruciales sobre las tarjetas de crédito. 
+La nueva tabla debe ser capaz de identificar de manera única cada tarjeta y establecer una relación adecuada con las otras dos tablas ("transaction" y "company"). 
+Después de crear la mesa será necesario que ingreses la información del documento denominado "dades_introduir_credit". 
+Recuerda mostrar el diagrama y realizar una breve descripción del mismo.*/
 
 #CREAR LA TABLA CREDIT CARD:
 CREATE TABLE IF NOT EXISTS credit_card (
@@ -39,10 +39,10 @@ ALTER TABLE transaction						#INDICO CAMBIO EN TABLA transaction
 ADD FOREIGN KEY (user_id) REFERENCES user(id);			#AGREGO COMO FOREIGN KEY user_id PARA QUE SE RELACIONES CON id 	DE LA TABLA user
 
 
-/*Exercici 2
-El departament de Recursos Humans ha identificat un error en el número de compte de l'usuari amb el: credit_card_id CcU-2938. 
-Es requereix actualitzar la informació que identifica un compte bancari a nivell internacional 
-(identificat com "IBAN"): TR323456312213576817699999. Recorda mostrar que el canvi es va realitzar.*/
+/*Ejercicio 2
+El departamento de Recursos Humanos ha identificado un error en el número de cuenta del usuario con el: credit_card_id CcU-2938. 
+Se requiere actualizar la información que identifica una cuenta bancaria a nivel internacional 
+(identificado como "IBAN"): TR323456312213576817699999. Recuerda mostrar que el cambio se realizó.*/
 
 SELECT * FROM credit_card 
 	WHERE id = "Ccu-2938";						#1º Visualizo los campos para ver lo que voy a cambiar
@@ -54,7 +54,7 @@ SELECT * FROM credit_card
 	WHERE id = "Ccu-2938";						#3º Vuelvo a revisar los campos para comprobar el cambio
 
 
-/* Exercici 3 En la taula "transaction" ingressa un nou usuari amb la següent informació:
+/* Ejercicio 3 En la tabla "transaction" ingresa un nuevo usuario con la siguiente información:
 
 Id	108B1D1D-5B23-A76C-55EF-C568E49A99DD
 credit_card_id	CcU-9999
@@ -72,8 +72,8 @@ INSERT INTO transaction (id, credit_card_id, company_id, user_id, lat, longitude
 SELECT * FROM transaction WHERE id ="108B1D1D-5B23-A76C-55EF-C568E49A99DD"  ;
 
 
-/* Exercici 4
-Des de recursos humans et sol·liciten eliminar la columna "pan" de la taula credit_*card. Recorda mostrar el canvi realitzat.*/
+/* Ejercicio 4
+Desde recursos humanos te solicitan eliminar la columna "pan" de la tabla credit_*card. Recuerda mostrar el cambio realizado.*/
 
 alter table credit_card drop column pan ;				#1º Elimino la columna indicada
 SELECT * from credit_card;						#2º Hago Select para comprobarlo
@@ -84,8 +84,8 @@ SELECT * from credit_card;						#2º Hago Select para comprobarlo
 
 	
 
-/* Exercici 1
-Elimina de la taula transaction el registre amb ID 02C6201E-D90A-1859-B4EE-88D2986D3B02 de la base de dades*/
+/* Ejercicio 1
+Elimina de la tabla transaction el registro con ID 02C6201E-D90A-1859-B4EE-88D2986D3B02 de la base de datos*/
 
 DELETE FROM transaction WHERE transaction.id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";	#1º Elimino el registro indicado
 	
@@ -93,12 +93,12 @@ SELECT * FROM TRANSACTION WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";		#2
 
 
 
-/* Exercici 2
- La secció de màrqueting desitja tenir accés a informació específica per a realitzar anàlisi i estratègies efectives. 
- S'ha sol·licitat crear una vista que proporcioni detalls clau sobre les companyies i les seves transaccions. 
- Serà necessària que creïs una vista anomenada VistaMarketing que contingui la següent informació: Nom de la companyia. 
- Telèfon de contacte. País de residència. Mitjana de compra realitzat per cada companyia. 
- Presenta la vista creada, ordenant les dades de major a menor mitjana de compra*/
+/* Ejercicio 2
+ La sección de marketing desea tener acceso a información específica para realizar análisis y estrategias efectivas. 
+ Se ha solicitado crear una vista que proporcione detalles clave sobre las compañías y sus transacciones. 
+ Será necesaria que crees una vista llamada VistaMarketing que contenga la siguiente información: Nombre de la compañía. 
+ Teléfono de contacto. País de residencia. Promedio de compra realizado por cada compañía. 
+ Presenta la vista creada, ordenando los datos de mayor a menor media de compra*/
  
 CREATE VIEW Vista_Marketing AS							#3º Creo la visa
 SELECT company_name, phone, country,media FROM company c JOIN			#2º Hago JOIN con los campos requeridos de la tabla company
@@ -109,8 +109,8 @@ ORDER BY media DESC;								#4º Ordeno por la media de mayor a menor como se pi
 
 
 
-/*Exercici 3
-Filtra la vista VistaMarketing per a mostrar només les companyies que tenen el seu país de residència en "Germany"*/
+/*Ejercicio 3
+Filtra la vista VistaMarketing para mostrar sólo las compañías que tienen su país de residencia en "Germany"*/
 	
 SELECT * FROM Vista_Marketing WHERE country = "Germany";	# Hago SELECT de la VISTA y filtro por Germany
 
@@ -122,10 +122,10 @@ SELECT * FROM Vista_Marketing WHERE country = "Germany";	# Hago SELECT de la VIS
 
 
 	
-/* Ejercicio 1 Exercici 1
-La setmana vinent tindràs una nova reunió amb els gerents de màrqueting. 
-Un company del teu equip va realitzar modificacions en la base de dades, però no recorda com les va realitzar. 
-Et demana que l'ajudis a deixar els comandos executats per a obtenir les següents modificacions (s'espera que realitzin 6 canvis) */
+/* Ejercicio 1 Ejercicio 1
+La semana próxima tendrás una nueva reunión con los gerentes de marketing. 
+Un compañero de tu equipo realizó modificaciones en la base de datos, pero no recuerda cómo las realizó. 
+Te pide que le ayudes a dejar los comandos ejecutados para obtener las siguientes modificaciones (se espera que realicen 6 cambios) */
 
 #1º CAMBIO: EN LA TABLA COMPANY HA ELIMINADO LA COLUMNA WEBSITE
 ALTER TABLE company DROP COLUMN website ;
@@ -146,8 +146,8 @@ ALTER TABLE credit_card ADD fecha_actual DATE;
 ALTER TABLE credit_card DROP COLUMN pan ;
 
 
-/*Exercici 2
-L'empresa també et sol·licita crear una vista anomenada "InformeTecnico" que contingui la següent informació:
+/*Ejercicio 2
+La empresa también te solicita crear una vista llamada "InformeTecnico" que contenga la siguiente información:
 
 ID de la transacció
 Nom de l'usuari/ària
