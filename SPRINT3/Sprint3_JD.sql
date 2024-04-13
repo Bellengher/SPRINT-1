@@ -158,7 +158,8 @@ Assegura't d'incloure informació rellevant de totes dues taules i utilitza àli
 Mostra els resultats de la vista, ordena els resultats de manera descendent en funció de la variable ID de transaction.*/
 
 CREATE VIEW InformeTecnico AS											#1º Creo la View
-SELECT t.id numero_de_transaccion,u.name nombre,u.surname apellido,c.company_name empresa,cc.iban FROM user u 	#2º Selecciono todos los campos requeridos
+SELECT t.id numero_de_transaccion,u.name nombre,u.surname apellido,c.company_name empresa,cc.iban 
+	FROM user u 												#2º Selecciono todos los campos requeridos
 JOIN transaction t ON u.id = t.user_id										#3º JOIN de user con transaction
 JOIN company c ON c.id = company_id										#4º JOIN de company con transaction	
 JOIN credit_card cc ON t.credit_card_id = cc.id;								#5º JOIN de credit_card con transaction
