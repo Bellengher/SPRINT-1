@@ -1,7 +1,7 @@
 								#NIVEL 1
             
-/* Exercici 1
-Realitza una subconsulta que mostri tots els usuaris amb més de 30 transaccions utilitzant almenys 2 taules.*/
+/* Ejercicio 1
+Realiza una subconsulta que muestre a todos los usuarios con más de 30 transacciones utilizando al menos 2 tablas.*/
 
 SELECT u.*, total_transactions							#2º Indico que quiero todo de la tabla users y el conteo de las transactions 
 FROM users u									# que hice en el 1º paso que juntataré haciendo una JOIN
@@ -14,8 +14,8 @@ WHERE total_transactions > 30;							# indicando que quiero las que sean mayor a
 
 
     
-/* Exercici 2
-Mostra la mitjana de la suma de transaccions per IBAN de les targetes de crèdit en la companyia Donec Ltd. utilitzant almenys 2 taules.*/
+/* Ejercicio 2
+Muestra el promedio de la suma de transacciones por IBAN de las tarjetas de crédito en la compañía Donec Ltd. utilizando al menos 2 tablas.*/
 
 SELECT * FROM companies WHERE company_name = "Donec Ltd" ;  					# company_id = 'b-2242'
 SELECT * FROM transactions WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
@@ -29,8 +29,8 @@ SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973'  ;					
 									
 								#NIVEL2
 									
-/* Crea una nova taula que reflecteixi l'estat de les targetes de crèdit basat en si les últimes tres transaccions 
-van ser declinades ( Solo tomo en cuenta aquellas tarjetas que tienen como mininmo 3 transaccciones hechas).
+/* Crea una nueva tabla que refleje el estado de las tarjetas de crédito basado en si las últimas tres transacciones 
+fueron declinadas ( Solo tomo en cuenta aquellas tarjetas que tienen como mininmo 3 transaccciones hechas).
 ⚠️SI QUISIERA CONSIDERAR TODAS LAS TARJETAS (INCLUYENDO AQUELLAS QUE TIENEN MENOS DEL MÍNIMO DE 3 TRANSACCIONES HECHAS) SOLO TENDRÍA QUE QUITAR
    LA PARTE FINAL DEL CÓDIGO ( HAVING COUNT(*) = 3 ) */
 
@@ -53,7 +53,8 @@ HAVING COUNT(*) = 3						#y con HAVING hago que cuente todas las filas de cada c
 ;								#que la tarjeta tiene 3 transacciones 
 
 
-# Quantes targetes estan actives? ***CONSIDERANDO ACTIVAS LAS TARJETAS QUE TIENEN AL MENOS 1 OPERACIÓN APROBADA EN LAS ULTIMAS 3 TRANSACCIONES
+# Cuantas tarjetas estan activas?
+***CONSIDERANDO ACTIVAS LAS TARJETAS QUE TIENEN AL MENOS 1 OPERACIÓN APROBADA EN LAS ULTIMAS 3 TRANSACCIONES
 
 SELECT COUNT(card_id) as 'total tarjetas operativas'			# Hago un COUNT de los card_id de la tabla que he creado (last_card_movements) 
 FROM last_card_movements 						#para ver cuantos encuentra.....
@@ -64,8 +65,8 @@ WHERE status = 'tarjeta operativa';					#filtrando solo las que el campo status 
 
 
 								#NIVEL3
-/*Crea una taula amb la qual puguem unir les dades del nou arxiu products.csv amb la base de dades creada, 
-tenint en compte que des de transaction tens product_ids.*/
+/*Crea una tabla con la que podamos unir los datos del nuevo archivo products.csv con la base de datos creada, 
+teniendo en cuenta que desde transaction tienes product_ids.*/
 
 
  CREATE TABLE product_transaction  (			# Despues de haber manipulado la tabla products creo una tabla nexo entre products y product_transaction
@@ -73,8 +74,8 @@ tenint en compte que des de transaction tens product_ids.*/
   product_ids int NOT NULL				# las tablas products y transactions.
 ) ;
 
-/* Genera la següent consulta:
-Necessitem conèixer el nombre de vegades que s'ha venut cada producte.*/
+/* Genera la siguiente consulta:
+Necesitamos conocer el número de veces que se ha vendido cada producto.*/
 
 SELECT product_ids producto, COUNT(row_num) total_vendido FROM			#2º La query que está por encima muestra el produc_ids 'producto' y hace un contreo de la row_num
  (SELECT product_ids ,								#1º Hago una subquery selecttionando product_ids don una funcion 
