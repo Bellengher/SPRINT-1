@@ -46,8 +46,10 @@ Es requereix actualitzar la informació que identifica un compte bancari a nivel
 
 SELECT * FROM credit_card 
 	WHERE id = "Ccu-2938";						#1º Visualizo los campos para ver lo que voy a cambiar
+	
 UPDATE credit_card SET IBAN = 'TR323456312213576817699999'
 	WHERE credit_card.id = 'CcU-2938';				#2º Cambio el IBAN por el nuevo requerido
+	
 SELECT * FROM credit_card 
 	WHERE id = "Ccu-2938";						#3º Vuelvo a revisar los campos para comprobar el cambio
 
