@@ -83,10 +83,11 @@ WHERE id ="108B1D1D-5B23-A76C-55EF-C568E49A99DD"  ;
 /* Ejercicio 4
 Desde recursos humanos te solicitan eliminar la columna "pan" de la tabla credit_*card. Recuerda mostrar el cambio realizado.*/
 
-alter table credit_card drop column pan ;				#1º Elimino la columna indicada
+ALTER TABLE credit_card 
+DROP COLUMN pan ;				#1º Elimino la columna indicada
 	
 SELECT * 
-from credit_card;							#2º Hago Select para comprobarlo
+FROM credit_card;				#2º Hago Select para comprobarlo
 
 
 
