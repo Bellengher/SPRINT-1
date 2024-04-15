@@ -1,33 +1,46 @@
 								#NIVEL 1
 
-#Ejercicio 1 Mostra totes les transaccions realitzades per empreses d'Alemanya.
+#Ejercicio 1 Muestra todas las transacciones realizadas por empresas de Alemania.
 
-SELECT * FROM transaction WHERE company_id IN          		#2º Busca las transacciones teniendo en cuenta el 1º filtro
-	(SELECT id FROM company WHERE country = "Germany")	#1º filtra todas las empresas de Germany
+SELECT * 
+FROM transaction 
+WHERE company_id IN          				#2º Busca las transacciones teniendo en cuenta el 1º filtro
+(SELECT id FROM company WHERE country = "Germany")	#1º filtra todas las empresas de Germany
 ;
 
 
-/*Ejercicio 2 Màrqueting està preparant alguns informes de tancaments de gestió, 
- et demanen que els passis un llistat de les empreses que han realitzat transaccions per una suma superior a la mitjana de totes les transaccions.*/
+/*Ejercicio 2 Marketing está preparando algunos informes de cierres de gestión, 
+ te piden que les pases un listado de las empresas que han realizado transacciones por una suma superior a la media de todas las transacciones.*/
 
-SELECT * FROM company WHERE company.id In 					3º busca * datos de las compañias que cumplan 2º filtro
-	(SELECT company_id  FROM transaction WHERE amount > 		 	#2º busca company_id sobre amount que sea mayor al 1º filtro
-		(SELECT AVG(amount) FROM transaction WHERE declined = 0))	#1º busco la media de las ventas (declined=0 considerando solo ventas finalizadas). 
+SELECT * 
+FROM company 
+WHERE company.id In 				3º busca * datos de las compañias que cumplan 2º filtro
+	(SELECT company_id  
+	FROM transaction 
+	WHERE amount > 		 		#2º busca company_id sobre amount que sea mayor al 1º filtro
+		(SELECT AVG(amount) 
+		FROM transaction 
+		WHERE declined = 0))		#1º busco la media de las ventas (declined=0 considerando solo ventas finalizadas). 
 ;
 
 
-/*Ejercicio 3 El departament de comptabilitat va perdre la informació de les transaccions realitzades per una empresa, 
- però no recorden el seu nom, només recorden que el seu nom iniciava amb la lletra c. Com els pots ajudar? Comenta-ho acompanyant-ho de la informació de les transaccions.*/ 
-⚠️ Para ayudar al departamento de mkt le haré una lista donde aparezca tanto el nombre de la compañía como la información de las transacciones
+/*Ejercicio 3 El departamento de contabilidad perdió la información de las transacciones realizadas por una empresa, 
+ pero no recuerdan su nombre, sólo recuerdan que su nombre iniciaba con la letra c. ¿Cómo les puedes ayudar? Comentalo acompañándolo de la información de las transacciones. 
+⚠️ Para ayudar al departamento de mkt le haré una lista donde aparezca tanto el nombre de la compañía como la información de las transacciones*/
 
 SELECT
-(SELECT company_name FROM company WHERE id = transaction.company_id) AS company_name, transaction.*	2º Selecciono el nombre de la compañía de la tabla company
-	FROM TRANSACTION 										# y todo de la tabla transaction y hago la busqueda dentro del primer filtro.
-    WHERE  transaction.company_id IN (SELECT id FROM company WHERE company_name LIKE 'c%');		1º Hago la búsqueda de las compañías cuyo nombre comienza por c
+	(SELECT company_name 
+	FROM company 
+	WHERE id = transaction.company_id) AS company_name, transaction.*	#2º Selecciono el nombre de la compañía de la tabla company
+	FROM TRANSACTION 							# y todo de la tabla transaction y hago la busqueda dentro del primer filtro.
+    WHERE  transaction.company_id IN 
+		(SELECT id 
+		FROM company 
+		WHERE company_name LIKE 'c%');					#1º Hago la búsqueda de las compañías cuyo nombre comienza por c
 
 
 									
-#Ejercicio 4 Van eliminar del sistema les empreses que no tenen transaccions registrades, lliura el llistat d'aquestes empreses.
+#Ejercicio 4 Eliminaron del sistema a las empresas que no tienen transacciones registradas, entrega el listado de estas empresas.
 
 SELECT id,company_name FROM company 						#1º busca las id y company_name de la tabla company 
 	WHERE id NOT IN 							# que no estén
@@ -37,15 +50,15 @@ SELECT id,company_name FROM company 						#1º busca las id y company_name de la
 
 								#NIVEL 2
 
-/*Ejercicio 1 En la teva empresa, es planteja un nou projecte per a llançar algunes campanyes publicitàries per a fer competència a la companyia non institute. 
- Per a això, et demanen la llista de totes les transaccions realitzades per empreses que estan situades en el mateix país que aquesta companyia.*/
+/*Ejercicio 1 En tu empresa, se plantea un nuevo proyecto para lanzar algunas campañas publicitarias para hacer competencia a la compañía non institute. 
+ Para ello, te piden la lista de todas las transacciones realizadas por empresas que están situadas en el mismo país que esta compañía.*/
 
 SELECT * FROM transaction  WHERE company_id IN 						#3º muestra lista de * transaction utilizando 2º filtro
 	(SELECT id FROM company WHERE country IN  					#2º busca los id de company utilizando 1º filtro
 		(SELECT country FROM company WHERE company_name = "non institute")) 	#1º encuentra el country de Non Institue
  ;
  
- #Ejercicio 2  El departament de comptabilitat necessita que trobis l'empresa que ha realitzat la transacció de major suma en la base de dades.
+ #Ejercicio 2  El departamento de contabilidad necesita que encuentres la empresa que ha realizado la transacción de mayor suma en la base de datos.
  
 SELECT max(amount) , tabla.* FROM transaction ,					#4º selecciono el mñaximo importe de transaction y todo lo de la tabla derivada que he creado
   (SELECT * FROM company WHERE id IN 						#3º Utlizo toda le información de company que esté dentro de los filtros anteriores para crear una tabla derivada
@@ -57,9 +70,9 @@ SELECT max(amount) , tabla.* FROM transaction ,					#4º selecciono el mñaximo 
  
 								#NIVEL 3
  
- /*Ejercicio 1 S'estan establint els objectius de l'empresa per al següent trimestre, 
-  per la qual cosa necessiten una base sòlida per a avaluar el rendiment i mesurar l'èxit en els diferents mercats. 
-  Per a això, necessiten el llistat dels països la mitjana de transaccions dels quals sigui superior a la mitjana general.*/
+ /*Ejercicio 1 Se están estableciendo los objetivos de la empresa para el siguiente trimestre, 
+  por lo que necesitan una base sólida para evaluar el rendimiento y medir el éxito en los diferentes mercados. 
+  Para ello, necesitan el listado de los países cuya media de transacciones sea superior a la media general.*/
 
 SELECT company.country, ROUND(AVG(transaction.amount), 2) AS media_pais			#1º Selecciono nombre de país y media de amount , utilizo round para dejarlo en 2 desimales.
 FROM company, transaction								# de las tablas comnay,transaction
@@ -71,9 +84,9 @@ HAVING media_pais > (			 						#4º utilizo Having para indicar que tome la medi
         FROM transaction
         WHERE declined = 0								# indicando declined = 0 para que no tome las transacciones rechazadas.
     );
-/*Ejercico 2 Necessitem optimitzar l'assignació dels recursos i dependrà de la capacitat operativa que es requereixi,
- per la qual cosa et demanen la informació sobre la quantitat de transaccions que realitzen les empreses, però el departament de recursos humans és exigent 
- i vol un llistat de les empreses on especifiquis si tenen més de 4 transaccions o menys.*/
+/*Ejercico 2 Necesitamos optimizar la asignación de los recursos y dependerá de la capacidad operativa que se requiera,
+ por lo que te piden la información sobre la cantidad de transacciones que realizan las empresas, pero el departamento de recursos humanos es exigente 
+ y quiere un listado de las empresas donde especifiques si tienen más de 4 transacciones o menos.*/
 
 SELECT company.* , tfinalizadas.conteo,				#2º Selecciono todos los campos de company y el campo conteo la tabla tfinalizadas									
        CASE 							#3º con Case hago la evaluacion respecto al conteo	
