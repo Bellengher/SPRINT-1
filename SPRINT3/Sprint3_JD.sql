@@ -44,14 +44,17 @@ El departamento de Recursos Humanos ha identificado un error en el número de cu
 Se requiere actualizar la información que identifica una cuenta bancaria a nivel internacional 
 (identificado como "IBAN"): TR323456312213576817699999. Recuerda mostrar que el cambio se realizó.*/
 
-SELECT * FROM credit_card 
-	WHERE id = "Ccu-2938";						#1º Visualizo los campos para ver lo que voy a cambiar
+SELECT * 
+FROM credit_card 
+WHERE id = "Ccu-2938";						#1º Visualizo los campos para ver lo que voy a cambiar
 	
-UPDATE credit_card SET IBAN = 'TR323456312213576817699999'
-	WHERE credit_card.id = 'CcU-2938';				#2º Cambio el IBAN por el nuevo requerido
+UPDATE credit_card 
+SET IBAN = 'TR323456312213576817699999'
+WHERE credit_card.id = 'CcU-2938';				#2º Cambio el IBAN por el nuevo requerido
 	
-SELECT * FROM credit_card 
-	WHERE id = "Ccu-2938";						#3º Vuelvo a revisar los campos para comprobar el cambio
+SELECT * 
+FROM credit_card 
+WHERE id = "Ccu-2938";						#3º Vuelvo a revisar los campos para comprobar el cambio
 
 
 /* Ejercicio 3 En la tabla "transaction" ingresa un nuevo usuario con la siguiente información:
@@ -68,15 +71,22 @@ declined	0
 INSERT INTO credit_card (id) VALUES ('CcU-9999');				# Hago esto porque al meter los datos en transaction me pide que credit_card.id tenga valor por ser FK
 INSERT INTO company (id) VALUES ('b-9999');					# Hago esto porque al meter los datos en transaction me pide que company.id tenga valor por ser FK
 INSERT INTO user (id) VALUES ('9999');						# Hago esto porque al meter los datos en transaction me pide que user.id tenga valor por ser FK
-INSERT INTO transaction (id, credit_card_id, company_id, user_id, lat, longitude , amount , declined) VALUES ('108B1D1D-5B23-A76C-55EF-C568E49A99DD','CcU-9999','b-9999','9999','829.999','-117.999','111.11','0');
-SELECT * FROM transaction WHERE id ="108B1D1D-5B23-A76C-55EF-C568E49A99DD"  ;
+	
+INSERT INTO transaction (id, credit_card_id, company_id, user_id, lat, longitude , amount , declined)
+	VALUES ('108B1D1D-5B23-A76C-55EF-C568E49A99DD','CcU-9999','b-9999','9999','829.999','-117.999','111.11','0');
+
+SELECT * 
+FROM transaction
+WHERE id ="108B1D1D-5B23-A76C-55EF-C568E49A99DD"  ;
 
 
 /* Ejercicio 4
 Desde recursos humanos te solicitan eliminar la columna "pan" de la tabla credit_*card. Recuerda mostrar el cambio realizado.*/
 
 alter table credit_card drop column pan ;				#1º Elimino la columna indicada
-SELECT * from credit_card;						#2º Hago Select para comprobarlo
+	
+SELECT * 
+from credit_card;							#2º Hago Select para comprobarlo
 
 
 
@@ -87,9 +97,12 @@ SELECT * from credit_card;						#2º Hago Select para comprobarlo
 /* Ejercicio 1
 Elimina de la tabla transaction el registro con ID 02C6201E-D90A-1859-B4EE-88D2986D3B02 de la base de datos*/
 
-DELETE FROM transaction WHERE transaction.id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";	#1º Elimino el registro indicado
+DELETE FROM transaction
+WHERE transaction.id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";				#1º Elimino el registro indicado
 	
-SELECT * FROM TRANSACTION WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";		#2º Hago SELECT y busco el id para comprobar la eliminacion. 
+SELECT * 
+FROM TRANSACTION 
+WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";					#2º Hago SELECT y busco el id para comprobar la eliminacion. 
 
 
 
@@ -100,11 +113,15 @@ SELECT * FROM TRANSACTION WHERE id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";		#2
  Teléfono de contacto. País de residencia. Promedio de compra realizado por cada compañía. 
  Presenta la vista creada, ordenando los datos de mayor a menor media de compra*/
  
-CREATE VIEW Vista_Marketing AS							#3º Creo la visa
-SELECT company_name, phone, country,media FROM company c JOIN			#2º Hago JOIN con los campos requeridos de la tabla company
-(SELECT company_id, ROUND(AVG(amount),2) media FROM transaction 		#1º Busco la media de TODAS las transacciones agrupando por compañia 
-GROUP BY company_id) d ON c.id = company_id								
-ORDER BY media DESC;								#4º Ordeno por la media de mayor a menor como se pide.
+CREATE VIEW Vista_Marketing AS					#3º Creo la visa
+SELECT company_name, phone, country,media 
+FROM company c 
+JOIN								#2º Hago JOIN con los campos requeridos de la tabla company
+(SELECT company_id, ROUND(AVG(amount),2) media 
+FROM transaction 						#1º Busco la media de TODAS las transacciones agrupando por compañia 
+GROUP BY company_id) d 
+ON c.id = company_id								
+ORDER BY media DESC;						#4º Ordeno por la media de mayor a menor como se pide.
 
 
 
@@ -112,7 +129,9 @@ ORDER BY media DESC;								#4º Ordeno por la media de mayor a menor como se pi
 /*Ejercicio 3
 Filtra la vista VistaMarketing para mostrar sólo las compañías que tienen su país de residencia en "Germany"*/
 	
-SELECT * FROM Vista_Marketing WHERE country = "Germany";	# Hago SELECT de la VISTA y filtro por Germany
+SELECT * 
+FROM Vista_Marketing
+WHERE country = "Germany";		# Hago SELECT de la VISTA y filtro por Germany
 
 
 
@@ -159,12 +178,13 @@ Mostra els resultats de la vista, ordena els resultats de manera descendent en f
 
 CREATE VIEW InformeTecnico AS											#1º Creo la View
 SELECT t.id numero_de_transaccion,u.name nombre,u.surname apellido,c.company_name empresa,cc.iban 
-	FROM user u 												#2º Selecciono todos los campos requeridos
+FROM user u 													#2º Selecciono todos los campos requeridos
 JOIN transaction t ON u.id = t.user_id										#3º JOIN de user con transaction
 JOIN company c ON c.id = company_id										#4º JOIN de company con transaction	
 JOIN credit_card cc ON t.credit_card_id = cc.id;								#5º JOIN de credit_card con transaction
 
-SELECT * FROM InformeTecnico;											#6º Visualizo la VIEW
+SELECT * 
+FROM InformeTecnico;												#6º Visualizo la VIEW
 
 
 
@@ -172,10 +192,18 @@ SELECT * FROM InformeTecnico;											#6º Visualizo la VIEW
 
 #PROBÉ LA OPCION DE HACERLO CON SUBQUERY PERO HE LEIDO QUE ES MÁS EFICIENTE HACERLO CON JOIN
 SELECT t.id Numer_Transaccion,							
-    (SELECT name FROM user WHERE id = t.user_id) Nombre,
-    (SELECT surname FROM user WHERE id = t.user_id) Apellido,
-    (SELECT company_name FROM company WHERE id = t.company_id) Empresa,
-    (SELECT iban FROM credit_card WHERE id = t.credit_card_id) Codigo_IBAN
+    (SELECT name 
+	FROM user
+	WHERE id = t.user_id) Nombre,
+    (SELECT surname
+	FROM user 
+	WHERE id = t.user_id) Apellido,
+    (SELECT company_name 
+	FROM company 
+	WHERE id = t.company_id) Empresa,
+    (SELECT iban 
+	FROM credit_card 
+	WHERE id = t.credit_card_id) Codigo_IBAN
 FROM transaction t;
 
 
