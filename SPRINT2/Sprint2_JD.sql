@@ -55,9 +55,15 @@ WHERE NOT EXISTS			# que no existe
 /*Ejercicio 1 En tu empresa, se plantea un nuevo proyecto para lanzar algunas campañas publicitarias para hacer competencia a la compañía non institute. 
  Para ello, te piden la lista de todas las transacciones realizadas por empresas que están situadas en el mismo país que esta compañía.*/
 
-SELECT * FROM transaction  WHERE company_id IN 						#3º muestra lista de * transaction utilizando 2º filtro
-	(SELECT id FROM company WHERE country IN  					#2º busca los id de company utilizando 1º filtro
-		(SELECT country FROM company WHERE company_name = "non institute")) 	#1º encuentra el country de Non Institue
+SELECT * 
+FROM transaction  
+WHERE company_id IN 						#3º muestra lista de * transaction utilizando 2º filtro
+	(SELECT id 
+    FROM company 
+    WHERE country =  						#2º busca los id de company utilizando 1º filtro
+		(SELECT country 
+        FROM company 
+        WHERE company_name = "non institute")) 			#1º encuentra el country de Non Institue
  ;
  
  #Ejercicio 2  El departamento de contabilidad necesita que encuentres la empresa que ha realizado la transacción de mayor suma en la base de datos.
