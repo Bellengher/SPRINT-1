@@ -115,5 +115,5 @@ FROM company , 							# de las tablas company y tfinalizadas
      FROM transaction 
      WHERE declined = 0 													
      GROUP BY company_id) AS tfinalizadas			#1º Hago una tabla derivada llamada tfinalizadas formada por las columnas company_id y conteo y agrupo por company_id								
-     WHERE company.id = tfinalizadas_id				#4º Indicando la relacion entre tablas.
+     WHERE company.id = tfinalizadas.company_id			#4º Indicando la relacion entre tablas.
 ;
