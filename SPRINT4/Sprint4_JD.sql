@@ -26,7 +26,7 @@ FROM transactions
 WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
 									
 SELECT * 
-from credit_cards
+FROM credit_cards
 WHERE id = "CcU-2973";						#iban = 'PT87806228135092429456346'
 									
 SELECT ROUND(AVG(amount),2) 
