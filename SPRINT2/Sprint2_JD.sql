@@ -5,7 +5,9 @@
 SELECT * 
 FROM transaction 
 WHERE company_id IN          				#2º Busca las transacciones teniendo en cuenta el 1º filtro
-(SELECT id FROM company WHERE country = "Germany")	#1º filtra todas las empresas de Germany
+	(SELECT id 
+	FROM company 
+	WHERE country = "Germany")			#1º filtra todas las empresas de Germany
 ;
 
 
@@ -33,11 +35,11 @@ SELECT
 	FROM company 
 	WHERE id = transaction.company_id) AS company_name, transaction.*	#2º Selecciono el nombre de la compañía de la tabla company
 	FROM TRANSACTION 							# y todo de la tabla transaction y hago la busqueda dentro del primer filtro.
-    WHERE  transaction.company_id IN 
+    	WHERE  transaction.company_id IN 
 		(SELECT id 
 		FROM company 
-		WHERE company_name LIKE 'c%');					#1º Hago la búsqueda de las compañías cuyo nombre comienza por c
-
+		WHERE company_name LIKE 'c%')					#1º Hago la búsqueda de las compañías cuyo nombre comienza por c
+;
 
 									
 #Ejercicio 4 Eliminaron del sistema a las empresas que no tienen transacciones registradas, entrega el listado de estas empresas.
@@ -59,19 +61,25 @@ SELECT *
 FROM transaction  
 WHERE company_id IN 						#3º muestra lista de * transaction utilizando 2º filtro
 	(SELECT id 
-    FROM company 
-    WHERE country =  						#2º busca los id de company utilizando 1º filtro
+    	FROM company 
+    	WHERE country =  					#2º busca los id de company utilizando 1º filtro
 		(SELECT country 
-        FROM company 
-        WHERE company_name = "non institute")) 			#1º encuentra el country de Non Institue
+        	FROM company 
+        	WHERE company_name = "non institute")) 		#1º encuentra el country de Non Institue
  ;
  
  #Ejercicio 2  El departamento de contabilidad necesita que encuentres la empresa que ha realizado la transacción de mayor suma en la base de datos.
  
-SELECT max(amount) , tabla.* FROM transaction ,					#4º selecciono el mñaximo importe de transaction y todo lo de la tabla derivada que he creado
-  (SELECT * FROM company WHERE id IN 						#3º Utlizo toda le información de company que esté dentro de los filtros anteriores para crear una tabla derivada
-	(SELECT company_id FROM transaction WHERE amount IN 			#2º Busco el company_id que coincida con el 1º filtro
-		(SELECT MAX(amount) FROM transaction) )) as tabla		#1º Busco el MAX(amount)
+SELECT max(amount) , tabla.* 
+FROM transaction ,						#4º selecciono el mñaximo importe de transaction y todo lo de la tabla derivada que he creado
+	(SELECT * 
+	FROM company 
+	 WHERE id IN 						#3º Utlizo toda le información de company que esté dentro de los filtros anteriores para crear una tabla derivada
+		(SELECT company_id 
+	 	FROM transaction 
+	 	WHERE amount IN 				#2º Busco el company_id que coincida con el 1º filtro
+			(SELECT MAX(amount) 
+	 		FROM transaction) )) as tabla		#1º Busco el MAX(amount)
  GROUP BY id
  ;
  
@@ -91,7 +99,7 @@ HAVING media_pais > (			 						#4º utilizo Having para indicar que tome la medi
         SELECT AVG(amount)								# mayor a la media general del campo amount de transaction
         FROM transaction
         WHERE declined = 0								# indicando declined = 0 para que no tome las transacciones rechazadas.
-    );
+);
 /*Ejercico 2 Necesitamos optimizar la asignación de los recursos y dependerá de la capacidad operativa que se requiera,
  por lo que te piden la información sobre la cantidad de transacciones que realizan las empresas, pero el departamento de recursos humanos es exigente 
  y quiere un listado de las empresas donde especifiques si tienen más de 4 transacciones o menos.*/
@@ -107,5 +115,5 @@ FROM company , 							# de las tablas company y tfinalizadas
      FROM transaction 
      WHERE declined = 0 													
      GROUP BY company_id) AS tfinalizadas			#1º Hago una tabla derivada llamada tfinalizadas formada por las columnas company_id y conteo y agrupo por company_id								
-WHERE company.id = tfinalizadas_id				#4º Indicando la relacion entre tablas.
+     WHERE company.id = tfinalizadas_id				#4º Indicando la relacion entre tablas.
 ;
