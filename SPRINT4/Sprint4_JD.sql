@@ -15,27 +15,30 @@ WHERE total_transactions > 30;							# indicando que quiero las que sean mayor a
 
     
 /* Ejercicio 2
-Muestra el promedio de la suma de transacciones por IBAN de las tarjetas de crédito en la compañía Donec Ltd. utilizando al menos 2 tablas.*/
+Muestra el promedio de la suma de transacciones por IBAN de las tarjetas de crédito en la compañía Donec Ltd. utilizando al menos 2 tablas.
+Como el ejercicio pide que se resuelva por el iban , primero debo encontrar el iban de la empresa Donec Ltd y para eso utilizaré las 
+relaciones de las tablas*/
 
-SELECT *
-FROM companies 
-WHERE company_name = "Donec Ltd" ;  				# company_id = 'b-2242'
-									
-SELECT * 
-FROM transactions 
-WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
-									
-SELECT * 
-FROM credit_cards
-WHERE id = "CcU-2973";						#iban = 'PT87806228135092429456346'
-									
-SELECT ROUND(AVG(amount),2) 
-FROM transactions 
-WHERE card_id = 'CcU-2973' AND declined = 0 ;			#Aquí solo tengo en cuenta las transacciones aprobadas.
-									
-SELECT ROUND(AVG(amount),2) 
-FROM transactions 
-WHERE card_id = 'CcU-2973'  ;					#Aquí incluyo las aprobadas y rechazadas.
+SELECT cc.iban								#Por medio de esta consulta llego a encontrar el iban correspondiente a la empresa 
+FROM credit_cards cc
+JOIN transactions t ON cc.id = t.card_id
+JOIN companies c ON t.business_id = c.company_id
+WHERE c.company_name = "Donec Ltd";					
+
+#Una vez encontrado el iban que es: 'PT87806228135092429456346' hago la busquede de la media utilizando 3 tablas.
+	
+SELECT ROUND(AVG(t.amount),2) 
+FROM transactions t 
+JOIN credit_cards cc ON cc.id = t.card_id
+JOIN companies c ON t.business_id = c.company_id
+WHERE cc.iban = 'PT87806228135092429456346' AND t.declined = 0 ;	#Aquí solo tengo en cuenta las transacciones aprobadas.
+
+
+SELECT ROUND(AVG(t.amount),2) 
+FROM transactions t 
+JOIN credit_cards cc ON cc.id = t.card_id
+JOIN companies c ON t.business_id = c.company_id 
+WHERE cc.iban = 'PT87806228135092429456346'  ;				#Aquí incluyo las aprobadas y rechazadas.
 
 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------
