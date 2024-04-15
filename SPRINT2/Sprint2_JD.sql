@@ -14,7 +14,7 @@ WHERE company_id IN          				#2º Busca las transacciones teniendo en cuenta
 
 SELECT * 
 FROM company 
-WHERE company.id In 				3º busca * datos de las compañias que cumplan 2º filtro
+WHERE company.id In 				#3º busca * datos de las compañias que cumplan 2º filtro
 	(SELECT company_id  
 	FROM transaction 
 	WHERE amount > 		 		#2º busca company_id sobre amount que sea mayor al 1º filtro
@@ -43,9 +43,10 @@ SELECT
 #Ejercicio 4 Eliminaron del sistema a las empresas que no tienen transacciones registradas, entrega el listado de estas empresas.
 
 SELECT id,company_name 
-FROM company 						#1º busca las id y company_name de la tabla company 
-WHERE  NOT EXISTS					# que no estén
-	(SELECT company_id FROM transaction)		# en el campo company_id de la tabla transaction
+FROM company 				#1º busca las id y company_name de la tabla company 
+WHERE NOT EXISTS			# que no existe
+	(SELECT company_id 
+	FROM transaction)		# en el campo company_id de la tabla transaction
 ;
 
 
