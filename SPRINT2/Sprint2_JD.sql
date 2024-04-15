@@ -42,9 +42,10 @@ SELECT
 									
 #Ejercicio 4 Eliminaron del sistema a las empresas que no tienen transacciones registradas, entrega el listado de estas empresas.
 
-SELECT id,company_name FROM company 						#1º busca las id y company_name de la tabla company 
-	WHERE id NOT IN 							# que no estén
-	(SELECT company_id FROM transaction)					# en el campo company_id de la tabla transaction
+SELECT id,company_name 
+FROM company 						#1º busca las id y company_name de la tabla company 
+WHERE  NOT EXISTS					# que no estén
+	(SELECT company_id FROM transaction)		# en el campo company_id de la tabla transaction
 ;
 
 
