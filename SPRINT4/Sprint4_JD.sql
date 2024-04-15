@@ -17,11 +17,25 @@ WHERE total_transactions > 30;							# indicando que quiero las que sean mayor a
 /* Ejercicio 2
 Muestra el promedio de la suma de transacciones por IBAN de las tarjetas de crédito en la compañía Donec Ltd. utilizando al menos 2 tablas.*/
 
-SELECT * FROM companies WHERE company_name = "Donec Ltd" ;  					# company_id = 'b-2242'
-SELECT * FROM transactions WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
-SELECT * from credit_cards WHERE id = "CcU-2973";						#iban = 'PT87806228135092429456346'
-SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973' AND declined = 0 ;	#Aquí solo tengo en cuenta las transacciones aprobadas.
-SELECT ROUND(AVG(amount),2) FROM transactions WHERE card_id = 'CcU-2973'  ;					#Aquí incluyo las aprobadas y rechazadas.
+SELECT *
+FROM companies 
+WHERE company_name = "Donec Ltd" ;  				# company_id = 'b-2242'
+									
+SELECT * 
+FROM transactions 
+WHERE business_id = "b-2242";					#card_id = 'CcU-2973'
+									
+SELECT * 
+from credit_cards
+WHERE id = "CcU-2973";						#iban = 'PT87806228135092429456346'
+									
+SELECT ROUND(AVG(amount),2) 
+FROM transactions 
+WHERE card_id = 'CcU-2973' AND declined = 0 ;			#Aquí solo tengo en cuenta las transacciones aprobadas.
+									
+SELECT ROUND(AVG(amount),2) 
+FROM transactions 
+WHERE card_id = 'CcU-2973'  ;					#Aquí incluyo las aprobadas y rechazadas.
 
 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +91,8 @@ teniendo en cuenta que desde transaction tienes product_ids.*/
 /* Genera la siguiente consulta:
 Necesitamos conocer el número de veces que se ha vendido cada producto.*/
 
-SELECT product_ids producto, COUNT(row_num) total_vendido FROM			#2º La query que está por encima muestra el produc_ids 'producto' y hace un contreo de la row_num
+SELECT product_ids producto, COUNT(row_num) total_vendido 
+FROM										#2º La query que está por encima muestra el produc_ids 'producto' y hace un contreo de la row_num
  (SELECT product_ids ,								#1º Hago una subquery selecttionando product_ids don una funcion 
            ROW_NUMBER() OVER (PARTITION BY product_ids ) AS row_num		# ROW NUMBER para que vaya generando un conteo de las filas por cada product_ids
     FROM product_transaction) dd
