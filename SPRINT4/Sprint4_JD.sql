@@ -94,12 +94,8 @@ teniendo en cuenta que desde transaction tienes product_ids.*/
 /* Genera la siguiente consulta:
 Necesitamos conocer el número de veces que se ha vendido cada producto.*/
 
-SELECT product_ids producto, COUNT(row_num) total_vendido 
-FROM										#2º La query que está por encima muestra el produc_ids 'producto' y hace un contreo de la row_num
- (SELECT product_ids ,								#1º Hago una subquery selecttionando product_ids don una funcion 
-           ROW_NUMBER() OVER (PARTITION BY product_ids ) AS row_num		# ROW NUMBER para que vaya generando un conteo de las filas por cada product_ids
-    FROM product_transaction) dd
-GROUP BY product_ids								#3º Agrupo el resultado por el campo product_ids
-ORDER BY producto ASC								#4º Y lo ordeno para que sea mas visual
- ;
-
+SELECT p.*, count(product_ids)  unidades_vendidas		#1º Selecciono todo de products y cuenta los product_ids de 			
+FROM product_transaction  pt					# la tabla product_transaction							
+JOIN products  p ON pt.product_ids = p.id			# haciendo una JOIN de las tablas
+GROUP BY p.id							# y para que el conteo sea por cada p.id agrupo por p.id 				
+;
