@@ -1,22 +1,8 @@
-#1º Creo la tabla de hechos transactions
-
-CREATE TABLE IF NOT EXISTS transactions (
-	id varchar (50) NOT NULL,
-    	card_id varchar (8) NOT NULL,
-    	business_id varchar (6) NOT NULL,
-    	timestamp varchar (20) NOT NULL,
-    	amount decimal (10,2) NOT NULL,
-    	declined boolean NOT NULL,
-    	product_ids varchar (10) NOT NULL, 
-    	user_id int NOT NULL,
-    	lat float,
-    	longitude float,
-    	PRIMARY KEY(id)
-);
+CREATE DATABASE IF NOT EXISTS operations; 
 
 
 
-#2º Creo la tabla dimensión users donde voy a unificar los 3 archivos csv de usuarios ya que después de analizarlos se observa que es viable.
+#1º Creo la tabla dimensión users donde voy a unificar los 3 archivos csv de usuarios ya que después de analizarlos se observa que es viable.
 
 CREATE TABLE IF NOT EXISTS users (
     	id INT,
@@ -32,11 +18,8 @@ CREATE TABLE IF NOT EXISTS users (
     	PRIMARY KEY(id)
 );
 
-# 3º Creo el indice de users con la tabla transactions
-CREATE INDEX idx_users_id ON transactions(user_id);
 
-
-#4º Creo la tabla companies
+#2º Creo la tabla companies
 CREATE TABLE IF NOT EXISTS companies (
     	company_id varchar (6),
     	company_name varchar (70),
@@ -47,11 +30,9 @@ CREATE TABLE IF NOT EXISTS companies (
     	PRIMARY KEY (company_id)
     );
     
-# 5º Creo el indice de companies con la tabla transactions
-CREATE INDEX idx_companies_id ON transactions(business_id);
     
 
-#6º Creo la tabla credit_cards
+#3º Creo la tabla credit_cards
 CREATE TABLE IF NOT EXISTS credit_cards (
 	id varchar(15),
 	user_id int,
@@ -65,10 +46,8 @@ CREATE TABLE IF NOT EXISTS credit_cards (
 	PRIMARY KEY (id)
 );
 
-# 7º Creo el indice de credit_cards con la tabla transactions
-CREATE INDEX idx_credit_cards_id ON transactions(card_id);
 
-#8º Creo la tabla products
+#4º Creo la tabla products
 CREATE TABLE IF NOT EXISTS products (
 	id int,
 	product_name varchar (50) ,
@@ -79,44 +58,65 @@ CREATE TABLE IF NOT EXISTS products (
 	PRIMARY KEY (id)
 ); 
 
-# 9º Creo el indice de credit_cards con la tabla transactions
-CREATE INDEX idx_products_id ON transactions(product_ids);
-SELECT * FROM transactions;
+#5º Creo la tabla de hechos transactions
 
-# Creo las FOREIGN KEY con respecto a la tabla de hechos (transactions)
-	
-ALTER TABLE transactions
-ADD CONSTRAINT fk_card_id
-FOREIGN KEY (card_id)
-REFERENCES credit_cards(id);
-
-ALTER TABLE transactions
-ADD CONSTRAINT fk_business_id
-FOREIGN KEY (business_id)
-REFERENCES companies(company_id);
-
-ALTER TABLE transactions
-ADD CONSTRAINT fk_user_id
-FOREIGN KEY (user_id)
-REFERENCES users(id);
+CREATE TABLE IF NOT EXISTS transactions (
+	id varchar (50) NOT NULL,
+    	card_id varchar (8) NOT NULL,
+    	business_id varchar (6) NOT NULL,
+    	timestamp varchar (20) NOT NULL,
+    	amount decimal (10,2) NOT NULL,
+    	declined boolean NOT NULL,
+    	product_ids varchar (10) NOT NULL, 
+    	user_id int NOT NULL,
+    	lat float,
+    	longitude float,
+    	PRIMARY KEY(id)
+	FOREIGN KEY(card_id) REFERENCES credit_card(id), 
+    	FOREIGN KEY(company_id) REFERENCES company(company_id),
+    	FOREIGN KEY(user_id) REFERENCES user(id)
+);
 
 	❗️PARA PODER ESTABLECER LA RELACION CON LA TABLA PRODUCTS HE TENIDO QUE CREAR UNA TABLA PUENTE 
-		ENTRE LAS TABLAS TRANSACTIONS Y PRODUCT A LA QUE HE LLAMADO PRODUCT_TRANSACTION.
+		ENTRE LAS TABLAS TRANSACTIONS Y PRODUCTS A LA QUE HE LLAMADO PRODUCT_TRANSACTION.
   	HE OPTADO POR ESTA OPCION YA QUE EN TRANSACTIONS EN EL CAMPO PRODUCTS_ID HAY MAS DE UN ID EN MUCHOS CASOS SEPARADOS POR ,
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 /*El proceso que se ha seguido ha sido : 
 1º He creado una tabla derivada de la tabla products que haga de nexo entre transactions y products a la cual he llamado product_transaction 
-y en la que he dejado unicamente dos campos que considero son los que necesito ( id , product_ids).*/
+y en la que he dejado unicamente dos campos que considero son los que necesito ( id , product_id).*/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------	
-  CREATE TABLE product_transaction (
-  id varchar(50) NOT NULL,
-  product_ids int NOT NULL
-  );
+CREATE TABLE product_transaction (
+  	id varchar(50) NOT NULL,
+  	product_ids int NOT NULL,
+	FOREIGN KEY(id) REFERENCES transactions(id),
+    	FOREIGN KEY(product_ids) REFERENCES products(id)
+);
+
 ❗️Los datos para esta tabla los he obtenido de la siguiente manera:
 	1º Cargo el CSV de la tabla transactions
 	2º Elimino las columnas que no voy a utilizar hasta quedarme sólo con id y products_id
-	3º Cargo el archivo CSV en algúna herramienta que me permita separar el campo products_id separados por , en distintas filas.
+
+3º Creo una tabla temporal para poder hacer los cambios previos.
+
+CREATE TABLE temporal (
+    id VARCHAR(50),
+    product_id VARCHAR(100)
+);
+
+4º Cargo los datos con WIZARD desde el CSV que he utilizado en el paso anterior.
+
+5º Separo los valores de product_ids separados por , en filas desde la tabla temporal a una definitiva (product_transaction)
+
+INSERT INTO product_transaction (id, product_ids)
+(SELECT 	id,
+		SUBSTRING_INDEX(SUBSTRING_INDEX(product_ids, ',', numbers.n), ',', -1) AS product_id
+FROM temporal
+JOIN (	SELECT 1 AS n 
+	UNION ALL SELECT 2 
+        UNION ALL SELECT 3 
+        UNION ALL SELECT 4	) AS numbers 
+ON CHAR_LENGTH(product_ids) - CHAR_LENGTH(REPLACE(product_ids, ',', '')) >= n - 1);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 /*
 2º He indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
