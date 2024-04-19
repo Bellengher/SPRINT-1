@@ -109,37 +109,13 @@ CREATE TABLE temporal (
 5º Separo los valores de product_ids separados por , en filas desde la tabla temporal a una definitiva (product_transaction)
 
 INSERT INTO product_transaction (id, product_ids)
-(SELECT 	id,
-		SUBSTRING_INDEX(SUBSTRING_INDEX(product_ids, ',', numbers.n), ',', -1) AS product_id
+(SELECT id,
+	SUBSTRING_INDEX(SUBSTRING_INDEX(product_ids, ',', numbers.n), ',', -1) AS product_id
 FROM temporal
 JOIN (	SELECT 1 AS n 
 	UNION ALL SELECT 2 
         UNION ALL SELECT 3 
         UNION ALL SELECT 4	) AS numbers 
 ON CHAR_LENGTH(product_ids) - CHAR_LENGTH(REPLACE(product_ids, ',', '')) >= n - 1);
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-/*
-2º He indexado las dos columnas de esta nueva tabla para poder hacer la relacion 
-3º He declarado como foreign key los dos campos de esta nueva tabla y hago referencia hacia las tablas con las que quiero
-crear la relacion. En este punto estaba teniendo problemas ya que el DATA TYPE del id de products lo tenía en INT y era incompatible con 
-la columna que quería utilizar de foreign key ya que esta la tenía en VARCHAR. Lo que hice fue cambiar el DATA TYPE y listo. */
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-Ahora que ya tengo las columnas deseadas para poder establecer las relaciones procedo a ello creando indices y posteriormente 
-declarando las foreign keys.
-	
-#CREACIÓN DE INDICES
-ALTER TABLE product_transaction					#agrego indice a product_transaction.id
-ADD INDEX idx_id (id);
 
-ALTER TABLE product_transaction					#agrego indice a product_transaction.product_ids	
-ADD INDEX idx_product_ids (product_ids);
-
-#CREACION DE FOREIGN KEY'S
-ALTER TABLE product_transaction
-ADD FOREIGN KEY (id) REFERENCES transactions(id);   		#creo foreign key product_transaction----->transactions
-
-ALTER TABLE product_transaction
-ADD FOREIGN KEY (product_ids) REFERENCES products(id);		#creo foreign key product_transaction----->products
-
-
-❗LA CARGA DE TODOS LOS DATOS A LAS TABLAS CREADAS LA HICE POR MEDIO DEL WIZZARD DE WORKBENCH.
+6º Finalmente elimino la tabla temporal.
