@@ -81,11 +81,8 @@ CREATE TABLE IF NOT EXISTS transactions (
 		ENTRE LAS TABLAS TRANSACTIONS Y PRODUCTS A LA QUE HE LLAMADO PRODUCT_TRANSACTION.
   	HE OPTADO POR ESTA OPCION YA QUE EN TRANSACTIONS EN EL CAMPO PRODUCTS_ID HAY MAS DE UN ID EN MUCHOS CASOS SEPARADOS POR ,
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------
-/*El proceso que se ha seguido ha sido : 
-1º He creado una tabla derivada de la tabla products que haga de nexo entre transactions y products a la cual he llamado product_transaction 
-y en la que he dejado unicamente dos campos que considero son los que necesito ( id , product_id).*/
-----------------------------------------------------------------------------------------------------------------------------------------------------------	
+1º Creo la tabla que utilizaré en el modelo:
+		
 CREATE TABLE product_transaction (
   	id varchar(50) NOT NULL,
   	product_ids int NOT NULL,
@@ -94,9 +91,8 @@ CREATE TABLE product_transaction (
 );
 
 ❗️Los datos para esta tabla los he obtenido de la siguiente manera:
-	1º Cargo el CSV de la tabla transactions
-	2º Elimino las columnas que no voy a utilizar hasta quedarme sólo con id y products_id
-
+	2º Cargo el CSV de la tabla transactions y elimino las columnas que no voy a utilizar hasta quedarme sólo con id y products_id
+	 
 3º Creo una tabla temporal para poder hacer los cambios previos.
 
 CREATE TABLE temporal (
