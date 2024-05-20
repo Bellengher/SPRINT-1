@@ -17,6 +17,7 @@ Sprint 5: Power BI introducción e indicadores
 
 Sprint 6: Visualizaciones e informes con Power BI
 
-## _Python_
+![Texto alternativo](https://github.com/JaviDoria/Mis-cosas/blob/2b569cdb6cc2127f3c1a301c74e8cd9f9230d4e5/Logo%20Python.png)
+
 
 Sprint 7: Nociones básicas
