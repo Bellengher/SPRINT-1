@@ -3,10 +3,12 @@
 
 [Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/afb16510fb1ecf7e0c81384f7b78c208e7924679/SPRINT1)
 Nociones básicas i componentes clave en el diseño de bases de datos relacionales.  
-[Sprint 2 :](https://github.com/JaviDoria/Data_Analytics/tree/c4bec9bba5376de8832a862317da4362fcd08089/SPRINT2)
-SQL avanzado (subquerys)
 
-Sprint 3: Gestión de tablas, índices y vistas
+[Sprint 2:](https://github.com/JaviDoria/Data_Analytics/tree/c4bec9bba5376de8832a862317da4362fcd08089/SPRINT2)
+SQL avanzado (subquerys).  
+
+[Sprint 3:](https://github.com/JaviDoria/Data_Analytics/tree/81512f39a4f9777146f5ec5a8328ba9968bf2259/SPRINT3)
+Gestión de tablas, índices y vistas.  
 
 Sprint 4: Creación y modelado de base de datos
 
