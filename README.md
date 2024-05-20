@@ -25,4 +25,11 @@ Visualizaciones e informes con Power BI.
 ![Texto alternativo](https://github.com/JaviDoria/Mis-cosas/blob/d363845f50a61075021bfcd0883307b395eadc05/Logo%20Python.png)
 
 
-Sprint 7: Nociones básicas
+[Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/4b8879a0fcf797353ab3e1328a3abeb9affd412c/SPRINT7)
+Nociones básicas.  
+
+[Sprint 8.1:]
+Visualizaciones en Python.  
+
+[Sprint 8.2:]
+Scripts en Power BI.  
