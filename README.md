@@ -28,7 +28,7 @@ Visualizaciones e informes con Power BI.
 [Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/4b8879a0fcf797353ab3e1328a3abeb9affd412c/SPRINT7)
 Nociones básicas.  
 
-[Sprint 8.1:]
+[Sprint 8.1:](https://github.com/JaviDoria/Data_Analytics/tree/ef76b9651d7b5256881e71a5cd8f7bbed2067add/SPRINT8.1)
 Visualizaciones en Python.  
 
 [Sprint 8.2:]
