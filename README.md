@@ -10,7 +10,8 @@ SQL avanzado (subquerys).
 [Sprint 3:](https://github.com/JaviDoria/Data_Analytics/tree/81512f39a4f9777146f5ec5a8328ba9968bf2259/SPRINT3)
 Gestión de tablas, índices y vistas.  
 
-Sprint 4: Creación y modelado de base de datos
+[Sprint 4:](https://github.com/JaviDoria/Data_Analytics/tree/38a8b790ac7fec83a61d14c635a36641fecd44d6/SPRINT4)
+Creación y modelado de base de datos.  
 
 ![Texto alternativo)](https://github.com/JaviDoria/Mis-cosas/blob/2b569cdb6cc2127f3c1a301c74e8cd9f9230d4e5/Logo%20Power%20BI.png)
 
