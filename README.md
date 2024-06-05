@@ -21,7 +21,8 @@ Power BI introducción e indicadores.
 [Sprint 6:](https://github.com/JaviDoria/Data_Analytics/tree/d654bd10ea2d8061a5f9a5463b90ac8d3ff4d6bb/SPRINT6)
 Visualizaciones e informes con Power BI.  
 
-![Texto alternativo](https://github.com/JaviDoria/Mis-cosas/blob/d363845f50a61075021bfcd0883307b395eadc05/Logo%20Python.png)
+![Texto alternativo](https://github.com/JaviDoria/Data_Analytics/assets/160622695/80eaeac3-cb75-49ad-9f94-07cc94e75ed3)
+
 
 [Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/f0dd66d4111a79b67f700098dd6615bf57413456/SPRINT7)
 Nociones básicas.  
