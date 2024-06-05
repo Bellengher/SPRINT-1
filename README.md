@@ -31,5 +31,5 @@ Nociones básicas.
 [Sprint 8.1:](https://github.com/JaviDoria/Data_Analytics/tree/ef76b9651d7b5256881e71a5cd8f7bbed2067add/SPRINT8.1)
 Visualizaciones en Python.  
 
-[Sprint 8.2:](https://github.com/JaviDoria/Data_Analytics/tree/e568f7bbfd8f13e1b543d88acaf0974b395aae7b/SPRINT8.2)
+[Sprint 8.2:](https://github.com/JaviDoria/Data_Analytics/tree/e8c9208e386b6febed393e889349c247974a8381/SPRINT8.2)
 Scripts en Power BI.  
