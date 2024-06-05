@@ -32,3 +32,5 @@ Visualizaciones en Python.
 
 [Sprint 8.2:](https://github.com/JaviDoria/Data_Analytics/tree/e8c9208e386b6febed393e889349c247974a8381/SPRINT8.2)
 Scripts en Power BI.  
+
+![Mongo_DB)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/4bba0b09-4f79-4bbd-a45e-8538939e2af7)
