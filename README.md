@@ -1,10 +1,10 @@
 no# **Bootcamp Data Analytics  (IT Academy/2024)**
 ![MySQL](https://github.com/JaviDoria/Data_Analytics/assets/160622695/9d8643ef-618b-44ea-b762-77b4bd0a2352)
 
-[Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/afb16510fb1ecf7e0c81384f7b78c208e7924679/SPRINT1)
+[Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT1)
 Nociones básicas i componentes clave en el diseño de bases de datos relacionales.  
 
-[Sprint 2:](https://github.com/JaviDoria/Data_Analytics/tree/c4bec9bba5376de8832a862317da4362fcd08089/SPRINT2)
+[Sprint 2:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT2)
 SQL avanzado (subquerys).  
 
 [Sprint 3:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT3)
