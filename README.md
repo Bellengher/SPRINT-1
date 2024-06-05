@@ -1,4 +1,4 @@
-# **Bootcamp Data Analytics  (IT Academy/2024)**
+no# **Bootcamp Data Analytics  (IT Academy/2024)**
 ![MySQL](https://github.com/JaviDoria/Data_Analytics/assets/160622695/9d8643ef-618b-44ea-b762-77b4bd0a2352)
 
 [Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/afb16510fb1ecf7e0c81384f7b78c208e7924679/SPRINT1)
@@ -30,7 +30,7 @@ Nociones básicas.
 [Sprint 8.1:](https://github.com/JaviDoria/Data_Analytics/tree/a42b01d04d652844dad3600e7931eabd98c7d864/SPRINT8.1)
 Visualizaciones en Python.  
 
-[Sprint 8.2:](https://github.com/JaviDoria/Data_Analytics/tree/e8c9208e386b6febed393e889349c247974a8381/SPRINT8.2)
+[Sprint 8.2:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT8.2)
 Scripts en Power BI.  
 
 ![Mongo_DB)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/4bba0b09-4f79-4bbd-a45e-8538939e2af7)
