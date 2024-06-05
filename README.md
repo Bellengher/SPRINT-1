@@ -1,4 +1,4 @@
-no# **Bootcamp Data Analytics  (IT Academy/2024)**
+# **Bootcamp Data Analytics  (IT Academy/2024)**
 ![MySQL](https://github.com/JaviDoria/Data_Analytics/assets/160622695/9d8643ef-618b-44ea-b762-77b4bd0a2352)
 
 [Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT1)
