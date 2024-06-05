@@ -1,5 +1,5 @@
 # **Bootcamp Data Analytics  (IT Academy/2024)**
-![Texto alternativo](https://github.com/JaviDoria/Data_Analytics/assets/160622695/9d8643ef-618b-44ea-b762-77b4bd0a2352)
+![MySQL](https://github.com/JaviDoria/Data_Analytics/assets/160622695/9d8643ef-618b-44ea-b762-77b4bd0a2352)
 
 [Sprint 1:](https://github.com/JaviDoria/Data_Analytics/tree/afb16510fb1ecf7e0c81384f7b78c208e7924679/SPRINT1)
 Nociones básicas i componentes clave en el diseño de bases de datos relacionales.  
@@ -13,7 +13,7 @@ Gestión de tablas, índices y vistas.
 [Sprint 4:](https://github.com/JaviDoria/Data_Analytics/tree/38a8b790ac7fec83a61d14c635a36641fecd44d6/SPRINT4)
 Creación y modelado de base de datos.  
 
-![Texto alternativo)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/3488d201-f808-4915-a4ab-ceb1c1436bcb)
+![PowerBI)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/3488d201-f808-4915-a4ab-ceb1c1436bcb)
 
 [Sprint 5:](https://github.com/JaviDoria/Data_Analytics/tree/d5b537f67573c306ffdb8c57ed09b615a5c11432/SPRINT5)
 Power BI introducción e indicadores.  
@@ -21,7 +21,7 @@ Power BI introducción e indicadores.
 [Sprint 6:](https://github.com/JaviDoria/Data_Analytics/tree/d654bd10ea2d8061a5f9a5463b90ac8d3ff4d6bb/SPRINT6)
 Visualizaciones e informes con Power BI.  
 
-![Texto alternativo](https://github.com/JaviDoria/Data_Analytics/assets/160622695/80eaeac3-cb75-49ad-9f94-07cc94e75ed3)
+![Python](https://github.com/JaviDoria/Data_Analytics/assets/160622695/80eaeac3-cb75-49ad-9f94-07cc94e75ed3)
 
 
 [Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/f0dd66d4111a79b67f700098dd6615bf57413456/SPRINT7)
