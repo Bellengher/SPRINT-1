@@ -13,8 +13,7 @@ Gestión de tablas, índices y vistas.
 [Sprint 4:](https://github.com/JaviDoria/Data_Analytics/tree/38a8b790ac7fec83a61d14c635a36641fecd44d6/SPRINT4)
 Creación y modelado de base de datos.  
 
-![Texto alternativo)](https://github.com/JaviDoria/Mis-cosas/blob/2b569cdb6cc2127f3c1a301c74e8cd9f9230d4e5/Logo%20Power%20BI.png)
-
+![Texto alternativo)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/3488d201-f808-4915-a4ab-ceb1c1436bcb)
 
 [Sprint 5:](https://github.com/JaviDoria/Data_Analytics/tree/d5b537f67573c306ffdb8c57ed09b615a5c11432/SPRINT5)
 Power BI introducción e indicadores.  
