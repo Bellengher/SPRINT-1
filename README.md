@@ -25,7 +25,7 @@ Visualizaciones e informes con Power BI.
 ![Texto alternativo](https://github.com/JaviDoria/Mis-cosas/blob/d363845f50a61075021bfcd0883307b395eadc05/Logo%20Python.png)
 
 
-[Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/4b8879a0fcf797353ab3e1328a3abeb9affd412c/SPRINT7)
+[Sprint 7:](https://github.com/JaviDoria/Data_Analytics/tree/f0dd66d4111a79b67f700098dd6615bf57413456/SPRINT7)
 Nociones básicas.  
 
 [Sprint 8.1:](https://github.com/JaviDoria/Data_Analytics/tree/a42b01d04d652844dad3600e7931eabd98c7d864/SPRINT8.1)
