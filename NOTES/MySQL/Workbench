@@ -89,7 +89,7 @@ DROP DATABASE nombre_de_base_de_datos ;		# ELIMINA BASE DE DATOS
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ***SECURE STEP*** 🪄
-SER AUTOCOMMIT = OFF;		# Desactiva el autoguardado.	
+SET AUTOCOMMIT = OFF;		# Desactiva el autoguardado.	
 COMMIT;				# Crea un punto de retorno antes de los cambios.
 ROLLBACK;			# Vuelve al punto de retorno.
 
