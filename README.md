@@ -36,3 +36,4 @@ Scripts en Power BI.
 ![Mongo_DB)](https://github.com/JaviDoria/Data_Analytics/assets/160622695/4bba0b09-4f79-4bbd-a45e-8538939e2af7)
 
 [Sprint 9:](https://github.com/JaviDoria/Data_Analytics/tree/main/SPRINT9)
+Bases de datos no relacionales.
